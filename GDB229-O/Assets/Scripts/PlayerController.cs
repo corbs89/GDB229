@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.1f, 1f)] float shootRate;
     [SerializeField][Range(50, 1000)] int shootDistance;
     [SerializeField][Range(1, 100)] int shootDamage;
+    
+    
 
     int jumpsCurrent;
     Vector3 movement;
     Vector3 playerVelocity;
     bool isShooting;
+    
 
     // we may need this later
     void Start()
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
         ResetJump();
         ProcessMovement();
         ProcessJump();
-        ProcessShoot();
+        
     }
 
     void ResetJump()
@@ -68,32 +71,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Time.deltaTime * playerVelocity);
     }
 
-    void ProcessShoot()
-    {
-        if (isShooting) { return; }
+    
+    
 
-        if (Input.GetButton("Shoot"))
-        {
-            StartCoroutine(Shoot());
-        }
-    }
-
-    IEnumerator Shoot()
-    {
-        isShooting = true;
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
-            if (hit.collider.GetComponent<IDamage>() != null)
-            {
-                hit.collider.GetComponent<IDamage>().TakeDamage(shootDamage);
-            }
-        }
-
-        yield return new WaitForSeconds(shootRate);
-
-        isShooting = false;
-    }
 }
