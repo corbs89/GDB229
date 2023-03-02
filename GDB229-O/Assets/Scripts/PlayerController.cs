@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
         ResetJump();
         ProcessMovement();
         ProcessJump();
-        
     }
 
     void ResetJump()
@@ -70,8 +69,4 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(Time.deltaTime * playerVelocity);
     }
-
-    
-    
-
 }
