@@ -82,19 +82,23 @@ public class GameManager : MonoBehaviour
     {
         enemiesRemaining += value;
 
-        if (enemiesRemaining <= 0) StartCoroutine(StartNextRound());
+        if (enemiesRemaining <= 0)
+        {
+            if (currentRound >= numberOfRounds)
+            {
+                PauseState();
+                activeMenu = winMenu;
+                activeMenu.SetActive(true);
+                return;
+            }
+
+            StartCoroutine(StartNextRound());
+        }
     }
 
     IEnumerator StartNextRound()
     {
         currentRound++;
-
-        if (currentRound > numberOfRounds)
-        {
-            PauseState();
-            activeMenu = winMenu;
-            activeMenu.SetActive(true);
-        }
 
         roundStartText.SetActive(true);
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();

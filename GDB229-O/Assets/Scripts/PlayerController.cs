@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         HP -= damage;
 
-        if (HP >= 0) GameManager.instance.PlayerDead();
+        if (HP <= 0) GameManager.instance.PlayerDead();
 
     }
 }

@@ -30,17 +30,19 @@ public class ButtonFunctions : MonoBehaviour
 
     public void PlayerRespawn()
     {
-        Debug.Log("This respawns the player.");
+        Resume();
+        GameManager.instance.playerController.SpawnPlayer();
     }
 
     public void ReduceEnemiesRemaining()
     {
-        GameManager.instance.UpdateGameGoal(-100);
         Resume();
+        GameManager.instance.UpdateGameGoal(-100);
     }
 
     public void ReduceHPToZero()
     {
+        Resume();
         GameManager.instance.playerController.TakeDamage(100);
     }
 }
