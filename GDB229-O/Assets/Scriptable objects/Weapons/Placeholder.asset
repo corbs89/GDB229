@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419273ca2f5f11441877d30f3d2fa402, type: 3}
   m_Name: Placeholder
   m_EditorClassIdentifier: 
-  damage: 0
-  fireRate: 0
-  magSize: 0
-  range: 0
+  damage: 100
+  fireRate: 1
+  magSize: 30
+  range: 200
