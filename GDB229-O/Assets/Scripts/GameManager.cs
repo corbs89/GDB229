@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public int enemiesRemaining;
     public int numberOfRounds;
     public int currentRound;
+    public int roundTimer;
+    public GameObject roundStartText;
 
     void Awake()
     {
@@ -31,6 +34,11 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+    }
+
+    void Start()
+    {
+        StartCoroutine(StartNextRound());
     }
 
     void Update()
@@ -74,10 +82,10 @@ public class GameManager : MonoBehaviour
     {
         enemiesRemaining += value;
 
-        if (enemiesRemaining <= 0) StartNextRound();
+        if (enemiesRemaining <= 0) StartCoroutine(StartNextRound());
     }
 
-    void StartNextRound()
+    IEnumerator StartNextRound()
     {
         currentRound++;
 
@@ -87,5 +95,21 @@ public class GameManager : MonoBehaviour
             activeMenu = winMenu;
             activeMenu.SetActive(true);
         }
+
+        roundStartText.SetActive(true);
+        roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
+
+        enemiesRemaining = 1; // for testing purposes until enemies can be instantiated
+
+        yield return new WaitForSeconds(roundTimer);
+
+        roundStartText.SetActive(false);
+    }
+
+    public void PlayerDead()
+    {
+        PauseState();
+        activeMenu = loseMenu;
+        activeMenu.SetActive(true);
     }
 }

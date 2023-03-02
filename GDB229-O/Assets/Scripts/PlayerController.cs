@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController characterController;
 
     [Header("-----Player Stats-----")]
+    [SerializeField][Range(0f, 10f)] int HP;
     [SerializeField][Range(1f, 10f)] float playerSpeed;
     [SerializeField][Range(1, 5)] int jumpTimes;
     [SerializeField][Range(5, 50)] int jumpSpeed;
@@ -17,9 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.1f, 1f)] float shootRate;
     [SerializeField][Range(50, 1000)] int shootDistance;
     [SerializeField][Range(1, 100)] int shootDamage;
-    
-    
 
+
+    int originalHP;
     int jumpsCurrent;
     Vector3 movement;
     Vector3 playerVelocity;
@@ -29,7 +30,8 @@ public class PlayerController : MonoBehaviour
     // we may need this later
     void Start()
     {
-        
+        originalHP = HP;
+        SpawnPlayer();
     }
 
 
@@ -68,5 +70,22 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
 
         characterController.Move(Time.deltaTime * playerVelocity);
+    }
+
+    public void SpawnPlayer()
+    {
+        HP = originalHP;
+
+        characterController.enabled = false;
+        if (GameManager.instance.playerSpawnPosition != null) transform.position = GameManager.instance.playerSpawnPosition.transform.position;
+        characterController.enabled = true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        HP -= damage;
+
+        if (HP >= 0) GameManager.instance.PlayerDead();
+
     }
 }
