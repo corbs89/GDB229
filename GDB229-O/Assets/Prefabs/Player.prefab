@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 8679029437562610392}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 8679029437562610392}
+  HP: 10
+  stamina: 10
   playerSpeed: 5
   jumpTimes: 2
   jumpSpeed: 12
