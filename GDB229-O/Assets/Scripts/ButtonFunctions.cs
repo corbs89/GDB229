@@ -45,4 +45,8 @@ public class ButtonFunctions : MonoBehaviour
         Resume();
         GameManager.instance.playerController.TakeDamage(5);
     }
+    public void AddPoints()
+    {
+        GameManager.instance.playerController.IncrementPoints(100);
+    }
 }

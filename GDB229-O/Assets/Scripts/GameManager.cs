@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject reticle;
     public Slider hpSlider;
     public Slider staminaSlider;
+    public TextMeshProUGUI pointsText;
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
             }
             else UnpauseState();
         }
+    }
+
+    public void SetPoints(int points)
+    {
+        pointsText.text = "Points: " + points.ToString("000000000");
     }
 
     public void PauseState()

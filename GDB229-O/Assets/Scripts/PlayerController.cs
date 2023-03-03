@@ -27,10 +27,11 @@ public class PlayerController : MonoBehaviour
     int jumpsCurrent;
     Vector3 movement;
     Vector3 playerVelocity;
-    bool isShooting;
+    int points;
     
     public int GetHP() { return HP; }
     public int GetStamina() { return stamina; }
+    public int GetPoints() { return points; }
 
     void Start()
     {
@@ -104,9 +105,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void IncrementPoints(int value)
+    {
+        points += value;
+        UpdateUI();
+    }
+
     void UpdateUI()
     {
         GameManager.instance.hpSlider.value = HP;
         GameManager.instance.staminaSlider.value = stamina;
+        GameManager.instance.SetPoints(points);
     }
 }
