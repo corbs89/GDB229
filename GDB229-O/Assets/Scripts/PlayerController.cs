@@ -96,5 +96,6 @@ public class PlayerController : MonoBehaviour
     void UpdateUI()
     {
         GameManager.instance.hpSlider.value = HP;
+        GameManager.instance.staminaSlider.value = stamina;
     }
 }

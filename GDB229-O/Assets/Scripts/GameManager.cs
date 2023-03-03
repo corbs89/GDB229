@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public GameObject reticle;
     public Slider hpSlider;
+    public Slider staminaSlider;
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartNextRound());
         hpSlider.maxValue = playerController.GetHP();
         hpSlider.value = playerController.GetHP();
+        staminaSlider.maxValue = playerController.GetStamina();
+        staminaSlider.value = playerController.GetStamina();
     }
 
     void Update()
