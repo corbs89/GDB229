@@ -11,14 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0f, 10f)] int HP;
     [SerializeField][Range(0f, 10f)] int stamina;
     [SerializeField][Range(1f, 10f)] float playerSpeed;
+    [SerializeField][Range(1f, 2f)] float sprintCoefficient;
     [SerializeField][Range(1, 5)] int jumpTimes;
     [SerializeField][Range(5, 50)] int jumpSpeed;
     [SerializeField][Range(10, 75)] int gravity;
 
     [Header("-----Gun Stats-----")]
-    [SerializeField][Range(0.1f, 1f)] float shootRate;
-    [SerializeField][Range(50, 1000)] int shootDistance;
-    [SerializeField][Range(1, 100)] int shootDamage;
+    [SerializeField] GenericGun weaponSlot1;
+    [SerializeField] GenericGun weaponSlot2;
+    [SerializeField] GenericGun equippedWeapon;
+    [SerializeField][Range(0f, 10f)] float weightModifier;
 
 
     int originalHP;
@@ -58,7 +60,16 @@ public class PlayerController : MonoBehaviour
         movement = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         movement = Vector3.Normalize(movement);
 
-        characterController.Move(playerSpeed * Time.deltaTime * movement);
+        float currentSpeed;
+
+        if (equippedWeapon != null)
+        {
+            currentSpeed = playerSpeed - (playerSpeed / (100 - equippedWeapon.GetWeight()) * weightModifier);
+        }
+        else currentSpeed = playerSpeed;
+
+        characterController.Move(currentSpeed * Time.deltaTime * movement);
+        Debug.Log(currentSpeed);
     }
 
     void ProcessJump()

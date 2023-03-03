@@ -30,8 +30,8 @@ public class GenericGun : MonoBehaviour
 
     }    
 
-    int GetDamage() { return _damage; }
-    int GetWeight() { return (int)_weaponClass; }
+    public int GetDamage() { return _damage; }
+    public int GetWeight() { return (int)_weaponClass; }
 
     
 }

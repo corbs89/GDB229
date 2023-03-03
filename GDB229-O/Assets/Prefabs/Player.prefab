@@ -155,12 +155,14 @@ MonoBehaviour:
   HP: 10
   stamina: 10
   playerSpeed: 5
+  sprintCoefficient: 0
   jumpTimes: 2
   jumpSpeed: 12
   gravity: 25
-  shootRate: 0
-  shootDistance: 0
-  shootDamage: 0
+  weaponSlot1: {fileID: 0}
+  weaponSlot2: {fileID: 0}
+  equippedWeapon: {fileID: 0}
+  weightModifier: 1
 --- !u!33 &8679029437562610399
 MeshFilter:
   m_ObjectHideFlags: 0
