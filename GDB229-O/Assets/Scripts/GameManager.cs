@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("-----UI-----")]
     public bool isPaused;
     public GameObject reticle;
+    public Slider hpSlider;
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartNextRound());
+        hpSlider.maxValue = playerController.GetHP();
+        hpSlider.value = playerController.GetHP();
     }
 
     void Update()

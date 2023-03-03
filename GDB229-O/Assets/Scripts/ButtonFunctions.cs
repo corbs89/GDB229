@@ -40,9 +40,9 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.UpdateGameGoal(-100);
     }
 
-    public void ReduceHPToZero()
+    public void ReduceHP()
     {
         Resume();
-        GameManager.instance.playerController.TakeDamage(100);
+        GameManager.instance.playerController.TakeDamage(5);
     }
 }

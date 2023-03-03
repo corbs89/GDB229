@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("-----Player Stats-----")]
     [SerializeField][Range(0f, 10f)] int HP;
+    [SerializeField][Range(0f, 10f)] int stamina;
     [SerializeField][Range(1f, 10f)] float playerSpeed;
     [SerializeField][Range(1, 5)] int jumpTimes;
     [SerializeField][Range(5, 50)] int jumpSpeed;
@@ -26,8 +27,9 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     bool isShooting;
     
+    public int GetHP() { return HP; }
+    public int GetStamina() { return stamina; }
 
-    // we may need this later
     void Start()
     {
         originalHP = HP;
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
     public void SpawnPlayer()
     {
         HP = originalHP;
+        UpdateUI();
 
         characterController.enabled = false;
         if (GameManager.instance.playerSpawnPosition != null) transform.position = GameManager.instance.playerSpawnPosition.transform.position;
@@ -84,8 +87,14 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         HP -= damage;
+        UpdateUI();
 
         if (HP <= 0) GameManager.instance.PlayerDead();
 
+    }
+
+    void UpdateUI()
+    {
+        GameManager.instance.hpSlider.value = HP;
     }
 }
