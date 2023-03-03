@@ -629,7 +629,8 @@ MonoBehaviour:
   playerSpawnPosition: {fileID: 0}
   isPaused: 0
   reticle: {fileID: 2098257378048670051}
-  hpSlider: {fileID: 7721285003693013478}
+  hpSlider: {fileID: 3358886011183650363}
+  staminaSlider: {fileID: 4257432525237186904}
   activeMenu: {fileID: 0}
   pauseMenu: {fileID: 5821874987412782558}
   winMenu: {fileID: 251628907817491929}
@@ -837,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 1000, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6285583482854930970
@@ -895,12 +896,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 150
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 150
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

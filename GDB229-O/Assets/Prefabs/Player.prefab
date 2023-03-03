@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 8679029437562610392}
   HP: 10
-  stamina: 0
+  stamina: 10
   playerSpeed: 5
   jumpTimes: 2
   jumpSpeed: 12
