@@ -27,7 +27,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             StartCoroutine(FlashMat());
-            Destroy(gameObject);
+            StartCoroutine(DestroyObject());
+            
         }
     }
 
@@ -37,5 +38,10 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
 
+    }
+    IEnumerator DestroyObject()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
     }
 }

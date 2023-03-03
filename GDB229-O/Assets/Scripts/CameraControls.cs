@@ -35,4 +35,8 @@ public class CameraControls : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
        
     }
+    public void CameraShake(int shakeMagnitude)
+    {
+
+    }
 }
