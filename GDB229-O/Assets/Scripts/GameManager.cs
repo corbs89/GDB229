@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     [Header("-----Game Goals-----")]
     public int enemiesRemaining;
-    public int numberOfRounds;
+    [Range(1f,2f)] public float enemiesCoefficient = 1.5f;
+    public int numberOfRounds; // 0 for infinite
     public int currentRound;
     public int roundTimer;
     public GameObject roundStartText;
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
         hpSlider.maxValue = playerController.GetHP();
         hpSlider.value = playerController.GetHP();
         staminaSlider.maxValue = playerController.GetStamina();
-        staminaSlider.value = playerController.GetStamina();
+        staminaSlider.value = staminaSlider.maxValue;
     }
 
     void Update()
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
 
         if (enemiesRemaining <= 0)
         {
-            if (currentRound >= numberOfRounds)
+            if (currentRound >= numberOfRounds || numberOfRounds == 0)
             {
                 PauseState();
                 activeMenu = winMenu;
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
         roundStartText.SetActive(true);
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
 
-        enemiesRemaining = 1; // for testing purposes until enemies can be instantiated
+        enemiesRemaining = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
 
         yield return new WaitForSeconds(roundTimer);
 
