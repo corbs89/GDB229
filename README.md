@@ -5,7 +5,7 @@ This is our FPS created for Full Sail University's Game Development Project and 
 
 Group Members:
 
-Ben Dixon
-Jaiten Beck
-Brandon Shoulders
+Ben Dixon,
+Jaiten Beck,
+Brandon Shoulders,
 Corbin Mein
