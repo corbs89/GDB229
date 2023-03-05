@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
         else currentSpeed = playerSpeed;
 
         characterController.Move(currentSpeed * Time.deltaTime * movement);
-        Debug.Log(currentSpeed);
     }
 
     void ProcessJump()
