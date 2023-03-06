@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     public Slider hpSlider;
     public Slider staminaSlider;
     public TextMeshProUGUI pointsText;
+    public TextMeshProUGUI magazineText;
+    public TextMeshProUGUI ammoReserveText;
+    public GameObject weaponName;
+    public TextMeshProUGUI weaponNameText;
+    public float weaponNameTimer;
     public GameObject activeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -88,8 +93,11 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        activeMenu.SetActive(false);
-        activeMenu = null;
+        if (activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+            activeMenu = null;
+        }        
     }
 
     public void UpdateGameGoal(int value)
@@ -129,5 +137,26 @@ public class GameManager : MonoBehaviour
         PauseState();
         activeMenu = loseMenu;
         activeMenu.SetActive(true);
+    }
+
+    public void UpdateMagazine(int magazine)
+    {
+        magazineText.text = magazine.ToString();
+    }
+
+    public void UpdateReserve(int reserve)
+    {
+        ammoReserveText.text = reserve.ToString();
+    }
+
+    public IEnumerator FlashWeaponName(Gun weapon)
+    {
+        weaponName.SetActive(true);
+        weaponNameText.text = weapon.name; // GetName function required
+
+        yield return new WaitForSeconds(weaponNameTimer);
+
+        weaponName.SetActive(false);
+
     }
 }
