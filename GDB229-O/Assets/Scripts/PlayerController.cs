@@ -61,13 +61,13 @@ public class PlayerController : MonoBehaviour
         movement = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         movement = Vector3.Normalize(movement);
 
-        float currentSpeed = playerSpeed;
+        float currentSpeed;
 
-        //if (equippedWeapon != null)
-        //{
-        //    currentSpeed = playerSpeed - (playerSpeed / (100 - equippedWeapon.GetWeight()) * weightModifier);
-        //}
-        //else currentSpeed = playerSpeed;
+        if (equippedWeapon != null)
+        {
+            currentSpeed = playerSpeed - (playerSpeed / (100 - equippedWeapon.GetWeight()) * weightModifier);
+        }
+        else currentSpeed = playerSpeed;
 
         characterController.Move(currentSpeed * Time.deltaTime * movement);
     }
