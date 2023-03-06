@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
+    [Header("-----Sensitivity-----")]
     [SerializeField] int sensitivityH;
     [SerializeField] int sensitivityV;
 
+    [Header("-----Vertical Min / Max-----")]
     [SerializeField] int verticalMin;
     [SerializeField] int verticalMax;
 
+    [Header("-----Invert-----")]
     [SerializeField] bool invertY;
 
+    [Header("-----Camera Shake-----")]
+    [SerializeField] float shakeDuration;
+    [SerializeField] float shakeMagnitude;
+
     float xRotation;
+    Vector3 initialPosition;
 
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        initialPosition = transform.position;
     }
 
     void Update()
@@ -35,8 +45,24 @@ public class CameraControls : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
        
     }
-    public void CameraShake(int shakeMagnitude)
+    public void CameraShake()
     {
+        StartCoroutine(Shake());
+    }
 
+    IEnumerator Shake()
+    {
+        float timeElapsed = 0f;
+
+        while (timeElapsed < shakeDuration)
+        {
+            transform.position = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+
+            timeElapsed += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.position = initialPosition;
     }
 }
