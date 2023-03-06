@@ -51,12 +51,14 @@ public class ButtonFunctions : MonoBehaviour
     }
     public static void LoadLevel(int sceneNumber)
     {
+        Debug.Log("Loading scene");
         switch(sceneNumber) 
         {
             case 0:
                 SceneManager.LoadScene("Armory");
                 break;
             case 1:
+                Debug.Log("loading 1");
                 SceneManager.LoadScene("Map 1");
                 break;
             case 2:
