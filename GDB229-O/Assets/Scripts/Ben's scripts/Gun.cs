@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum WeaponClass
+{
+    Pistol = 0,
+    light = 25,
+    medium = 50,
+    Heavy = 75
+}
+
 public class Gun : MonoBehaviour
 {
     [SerializeField] GunData data;
@@ -36,4 +45,7 @@ public class Gun : MonoBehaviour
         isShooting = false;
 
     }
+
+    public int GetDamage() { return data.damage; }
+    public int GetWeight() { return (int) data.weaponClass; }
 }
