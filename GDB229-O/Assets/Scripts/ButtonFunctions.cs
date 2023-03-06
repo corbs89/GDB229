@@ -70,8 +70,10 @@ public class ButtonFunctions : MonoBehaviour
                 SceneManager.LoadScene("Map 2");
                 break;
             case 3:
+                SceneManager.LoadScene("Map 3");
                 break;
             case 4:
+                SceneManager.LoadScene("Map 4");
                 break;
 
         }
