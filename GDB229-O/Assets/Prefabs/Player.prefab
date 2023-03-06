@@ -156,7 +156,7 @@ MonoBehaviour:
   HP: 10
   stamina: 10
   playerSpeed: 5
-  sprintCoefficient: 0
+  sprintCoefficient: 2
   jumpTimes: 2
   jumpSpeed: 12
   gravity: 25
