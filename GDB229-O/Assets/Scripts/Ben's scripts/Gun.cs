@@ -84,7 +84,7 @@ public class Gun : MonoBehaviour
     {
 
         isShooting = true;
-        CameraControls.CameraShake();
+        CameraControls.instance.CameraShake(data.damage, 0.0675f);
         CurrentMagCount--;
         GameManager.instance.UpdateMagazine(CurrentMagCount);
         RaycastHit hit;
