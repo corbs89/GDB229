@@ -52,6 +52,8 @@ MonoBehaviour:
   verticalMin: -90
   verticalMax: 90
   invertY: 0
+  shakeDuration: 0.05
+  shakeMagnitudeMultiplier: 0.0000001
 --- !u!20 &712100042
 Camera:
   m_ObjectHideFlags: 0
@@ -157,6 +159,9 @@ MonoBehaviour:
   stamina: 10
   playerSpeed: 5
   sprintCoefficient: 2
+  sprintCost: 0
+  staminaRechargeRate: 0
+  staminaRechargeStartTime: 0
   jumpTimes: 2
   jumpSpeed: 12
   gravity: 25

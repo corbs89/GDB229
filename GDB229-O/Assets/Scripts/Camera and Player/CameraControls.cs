@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraControls : MonoBehaviour
 {
+    public static CameraControls instance;
+
     [Header("-----Sensitivity-----")]
     [SerializeField] int sensitivityH;
     [SerializeField] int sensitivityV;
@@ -15,19 +17,23 @@ public class CameraControls : MonoBehaviour
     [Header("-----Invert-----")]
     [SerializeField] bool invertY;
 
-    [Header("-----Camera Shake-----")]
-    [SerializeField] float shakeDuration;
-    [SerializeField] float shakeMagnitude;
+    float shakeDuration = 0.01f;
+    float shakeMagnitudeMultiplier = 0.01f;
 
     float xRotation;
     Vector3 initialPosition;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        initialPosition = transform.position;
+        initialPosition = transform.localPosition;
     }
 
     void Update()
@@ -45,24 +51,24 @@ public class CameraControls : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
        
     }
-    public void CameraShake()
+    public void CameraShake(int damage, float duration)
     {
-        StartCoroutine(Shake());
+        StartCoroutine(Shake(damage, duration));
     }
 
-    IEnumerator Shake()
+    IEnumerator Shake(int magnitude, float duration)
     {
         float timeElapsed = 0f;
 
-        while (timeElapsed < shakeDuration)
+        while (timeElapsed < duration)
         {
-            transform.position = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            transform.localPosition = initialPosition + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), 0) * (float)magnitude * shakeMagnitudeMultiplier;
 
             timeElapsed += Time.deltaTime;
 
             yield return new WaitForEndOfFrame();
         }
 
-        transform.position = initialPosition;
+        transform.localPosition = initialPosition;
     }
 }
