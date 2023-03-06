@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(10, 75)] int gravity;
 
     [Header("-----Gun Stats-----")]
-    [SerializeField] GenericGun weaponSlot1;
-    [SerializeField] GenericGun weaponSlot2;
-    [SerializeField] GenericGun equippedWeapon;
+    [SerializeField] Gun weaponSlot1;
+    [SerializeField] Gun weaponSlot2;
+    [SerializeField] Gun equippedWeapon;
     [SerializeField][Range(0f, 10f)] float weightModifier;
 
 
@@ -83,6 +83,15 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
 
         characterController.Move(Time.deltaTime * playerVelocity);
+    }
+
+    void EquipWeapon(Gun weapon)
+    {
+        if (weapon != null)
+        {
+            equippedWeapon = weapon;
+            StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
+        }
     }
 
     public void SpawnPlayer()
