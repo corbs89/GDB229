@@ -49,4 +49,24 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.playerController.IncrementPoints(100);
     }
+    public static void LoadLevel(int sceneNumber)
+    {
+        switch(sceneNumber) 
+        {
+            case 0:
+                SceneManager.LoadScene("Armory");
+                break;
+            case 1:
+                SceneManager.LoadScene("Map 1");
+                break;
+            case 2:
+                SceneManager.LoadScene("Map 2");
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
+    }
 }
