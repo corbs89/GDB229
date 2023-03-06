@@ -162,7 +162,7 @@ MonoBehaviour:
   gravity: 25
   weaponSlot1: {fileID: 0}
   weaponSlot2: {fileID: 0}
-  equippedWeapon: {fileID: 6569255418513193548, guid: 77338c223b017504c882ff290c5449c5, type: 3}
+  equippedWeapon: {fileID: 7614788159887131535, guid: 77338c223b017504c882ff290c5449c5, type: 3}
   weightModifier: 5
 --- !u!33 &8679029437562610399
 MeshFilter:
