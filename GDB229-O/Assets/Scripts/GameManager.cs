@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     [Header("-----UI-----")]
     public bool isPaused;
     public GameObject reticle;
-    public Slider hpSlider;
-    public Slider staminaSlider;
+    public Image hpFill;
+    public Image staminaFill;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI magazineText;
     public TextMeshProUGUI ammoReserveText;
@@ -49,10 +49,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartNextRound());
-        hpSlider.maxValue = playerController.GetHP();
-        hpSlider.value = playerController.GetHP();
-        staminaSlider.maxValue = playerController.GetStamina();
-        staminaSlider.value = staminaSlider.maxValue;
     }
 
     void Update()
@@ -69,11 +65,6 @@ public class GameManager : MonoBehaviour
             }
             else UnpauseState();
         }
-    }
-
-    public void SetPoints(int points)
-    {
-        pointsText.text = "Points: " + points.ToString("000000000");
     }
 
     public void PauseState()

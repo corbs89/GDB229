@@ -8,10 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController characterController;
 
     [Header("-----Player Stats-----")]
-    [SerializeField][Range(0f, 10f)] int HP;
-    [SerializeField][Range(0f, 10f)] int stamina;
+    [SerializeField] int HP;
+    [SerializeField] float stamina;
     [SerializeField][Range(1f, 10f)] float playerSpeed;
     [SerializeField][Range(1f, 2f)] float sprintCoefficient;
+    [SerializeField][Range(0, 5)] int sprintCost;
+    [SerializeField][Range(1f, 10f)] float staminaRechargeRate;
+    [SerializeField][Range(1f, 10f)] float staminaRechargeStartTime;
     [SerializeField][Range(1, 5)] int jumpTimes;
     [SerializeField][Range(5, 50)] int jumpSpeed;
     [SerializeField][Range(10, 75)] int gravity;
@@ -24,18 +27,22 @@ public class PlayerController : MonoBehaviour
 
 
     int originalHP;
+    float staminaMax;
+    float timeSinceUsedStamina = Mathf.Infinity;
     int jumpsCurrent;
     Vector3 movement;
     Vector3 playerVelocity;
     int points;
     
     public int GetHP() { return HP; }
-    public int GetStamina() { return stamina; }
+    public float GetStamina() { return stamina; }
     public int GetPoints() { return points; }
 
     void Start()
     {
         originalHP = HP;
+        staminaMax = stamina;
+        UpdateHPUI();
         SpawnPlayer();
     }
 
@@ -45,6 +52,9 @@ public class PlayerController : MonoBehaviour
         ResetJump();
         ProcessMovement();
         ProcessJump();
+        IncrementStamina();
+
+        timeSinceUsedStamina += Time.deltaTime;
     }
 
     void ResetJump()
@@ -69,7 +79,41 @@ public class PlayerController : MonoBehaviour
         }
         else currentSpeed = playerSpeed;
 
+        if (IsSprinting() && stamina != 0 && movement != Vector3.zero)
+        {
+            currentSpeed *= sprintCoefficient;
+            DecrementStamina();
+        }
+
         characterController.Move(currentSpeed * Time.deltaTime * movement);
+    }
+
+    bool IsSprinting()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
+
+    void IncrementStamina()
+    {
+        if (timeSinceUsedStamina > staminaRechargeStartTime)
+        {
+            stamina += staminaRechargeRate * Time.deltaTime;
+
+            stamina = Mathf.Clamp(stamina, 0f, staminaMax);
+
+            if (stamina == staminaMax) ToggleStaminaPie(false);
+        }
+
+        UpdateStaminaUI();
+    }
+
+    void DecrementStamina()
+    {
+        ToggleStaminaPie(true);
+        timeSinceUsedStamina = 0;
+        stamina -= sprintCost * Time.deltaTime;
+        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
+        UpdateStaminaUI();
     }
 
     void ProcessJump()
@@ -97,7 +141,7 @@ public class PlayerController : MonoBehaviour
     public void SpawnPlayer()
     {
         HP = originalHP;
-        UpdateUI();
+        UpdateHPUI();
 
         characterController.enabled = false;
         if (GameManager.instance.playerSpawnPosition != null) transform.position = GameManager.instance.playerSpawnPosition.transform.position;
@@ -107,27 +151,29 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         HP -= damage;
-        UpdateUI();
+        UpdateHPUI();
 
         if (HP <= 0) GameManager.instance.PlayerDead();
-
     }
 
     public void IncrementPoints(int value)
     {
         points += value;
-        UpdateUI();
+        GameManager.instance.pointsText.text = "Points: " + points.ToString("000000000");
     }
 
-    void UpdateUI()
+    void UpdateHPUI()
     {
-        GameManager.instance.hpSlider.value = HP;
-        GameManager.instance.staminaSlider.value = stamina;
-        GameManager.instance.SetPoints(points);
+        GameManager.instance.hpFill.fillAmount = (float)HP / originalHP;
     }
 
-    
+    void UpdateStaminaUI()
+    {
+        GameManager.instance.staminaFill.fillAmount = stamina / staminaMax;
+    }
 
-
-
+    void ToggleStaminaPie(bool value)
+    {
+        GameManager.instance.staminaFill.enabled = value;
+    }
 }
