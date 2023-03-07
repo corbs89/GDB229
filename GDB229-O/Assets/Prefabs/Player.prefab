@@ -52,8 +52,6 @@ MonoBehaviour:
   verticalMin: -90
   verticalMax: 90
   invertY: 0
-  shakeDuration: 0.05
-  shakeMagnitudeMultiplier: 0.0000001
 --- !u!20 &712100042
 Camera:
   m_ObjectHideFlags: 0
@@ -114,10 +112,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8679029437562610397}
-  - component: {fileID: 8679029437562610396}
+  - component: {fileID: -1516884885623440810}
+  - component: {fileID: 8679029437562610393}
   - component: {fileID: 8679029437562610399}
   - component: {fileID: 8679029437562610398}
-  - component: {fileID: 8679029437562610393}
   - component: {fileID: 8679029437562610392}
   m_Layer: 0
   m_Name: Player
@@ -142,7 +140,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8679029437562610396
+--- !u!114 &-1516884885623440810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,24 +149,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8679029437562610395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 696a3d3e03f80e24b87acbd690162103, type: 3}
+  m_Script: {fileID: 11500000, guid: d8165115147f5894b81ece1c6101c13f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 8679029437562610392}
-  HP: 10
-  stamina: 10
-  playerSpeed: 5
-  sprintCoefficient: 2
-  sprintCost: 0
-  staminaRechargeRate: 0
-  staminaRechargeStartTime: 0
+  HP: 5
+  stamina: 5
+  playerSpeed: 5.5
+  sprintCoefficient: 1.5
   jumpTimes: 2
-  jumpSpeed: 12
+  jumpSpeed: 18
   gravity: 25
   weaponSlot1: {fileID: 0}
   weaponSlot2: {fileID: 0}
   equippedWeapon: {fileID: 0}
-  weightModifier: 5
+  weightModifier: 0
+--- !u!136 &8679029437562610393
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679029437562610395}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &8679029437562610399
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -219,20 +228,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8679029437562610393
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8679029437562610395}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &8679029437562610392
 CharacterController:
   m_ObjectHideFlags: 0
