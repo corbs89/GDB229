@@ -98,14 +98,18 @@ public class PlayerController : MonoBehaviour
         if (timeSinceUsedStamina > staminaRechargeStartTime)
         {
             stamina += staminaRechargeRate * Time.deltaTime;
+
+            stamina = Mathf.Clamp(stamina, 0f, staminaMax);
+
+            if (stamina == staminaMax) ToggleStaminaPie(false);
         }
 
-        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
         UpdateStaminaUI();
     }
 
     void DecrementStamina()
     {
+        ToggleStaminaPie(true);
         timeSinceUsedStamina = 0;
         stamina -= sprintCost * Time.deltaTime;
         stamina = Mathf.Clamp(stamina, 0f, staminaMax);
@@ -160,12 +164,16 @@ public class PlayerController : MonoBehaviour
 
     void UpdateHPUI()
     {
-        GameManager.instance.hpSlider.value = HP;
+        GameManager.instance.hpFill.fillAmount = (float)HP / originalHP;
     }
 
     void UpdateStaminaUI()
     {
-        GameManager.instance.staminaSlider.value = stamina;
+        GameManager.instance.staminaFill.fillAmount = stamina / staminaMax;
     }
 
+    void ToggleStaminaPie(bool value)
+    {
+        GameManager.instance.staminaFill.enabled = value;
+    }
 }
