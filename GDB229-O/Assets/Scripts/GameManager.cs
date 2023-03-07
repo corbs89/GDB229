@@ -71,11 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPoints(int points)
-    {
-        pointsText.text = "Points: " + points.ToString("000000000");
-    }
-
     public void PauseState()
     {
         reticle.SetActive(false);
