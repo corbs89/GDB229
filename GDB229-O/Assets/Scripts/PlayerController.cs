@@ -9,12 +9,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("-----Player Stats-----")]
     [SerializeField][Range(0f, 10f)] int HP;
-    [SerializeField][Range(0f, 100f)] float stamina;
+    [SerializeField][Range(0f, 10f)] int stamina;
     [SerializeField][Range(1f, 10f)] float playerSpeed;
     [SerializeField][Range(1f, 2f)] float sprintCoefficient;
-    [SerializeField][Range(1, 5)] float sprintCost;
-    [SerializeField][Range(1f, 10f)] float staminaRechargeRate;
-    [SerializeField][Range(1f, 10f)] float staminaRechargeStartTime;
     [SerializeField][Range(1, 5)] int jumpTimes;
     [SerializeField][Range(5, 50)] int jumpSpeed;
     [SerializeField][Range(10, 75)] int gravity;
@@ -27,21 +24,18 @@ public class PlayerController : MonoBehaviour
 
 
     int originalHP;
-    float staminaMax;
-    float timeSinceUsedStamina = Mathf.Infinity;
     int jumpsCurrent;
     Vector3 movement;
     Vector3 playerVelocity;
     int points;
     
     public int GetHP() { return HP; }
-    public float GetStamina() { return stamina; }
+    public int GetStamina() { return stamina; }
     public int GetPoints() { return points; }
 
     void Start()
     {
         originalHP = HP;
-        staminaMax = stamina;
         SpawnPlayer();
     }
 
@@ -51,9 +45,6 @@ public class PlayerController : MonoBehaviour
         ResetJump();
         ProcessMovement();
         ProcessJump();
-        IncrementStamina();
-
-        timeSinceUsedStamina += Time.deltaTime;
     }
 
     void ResetJump()
@@ -78,12 +69,6 @@ public class PlayerController : MonoBehaviour
         }
         else currentSpeed = playerSpeed;
 
-        if (IsSprinting() && stamina != 0 && movement != Vector3.zero)
-        {
-            currentSpeed *= sprintCoefficient;
-            DecrementStamina();
-        }
-
         characterController.Move(currentSpeed * Time.deltaTime * movement);
     }
 
@@ -98,30 +83,6 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
 
         characterController.Move(Time.deltaTime * playerVelocity);
-    }
-
-    bool IsSprinting()
-    {
-        return Input.GetKey(KeyCode.LeftShift);
-    }
-
-    void IncrementStamina()
-    {
-        if (timeSinceUsedStamina > staminaRechargeStartTime)
-        {
-            stamina += staminaRechargeRate * Time.deltaTime;
-        }
-
-        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
-        UpdateUI();
-    }
-
-    void DecrementStamina()
-    {
-        timeSinceUsedStamina = 0;
-        stamina -= sprintCost * Time.deltaTime;
-        stamina = Mathf.Clamp(stamina, 0f, staminaMax);
-        UpdateUI();
     }
 
     void EquipWeapon(Gun weapon)
@@ -164,4 +125,9 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.staminaSlider.value = stamina;
         GameManager.instance.SetPoints(points);
     }
+
+    
+
+
+
 }

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     [Header("-----Game Goals-----")]
     public int enemiesRemaining;
-    [Range(1f,2f)] public float enemiesCoefficient = 1.5f;
+    [Range(1f, 2f)] public float enemiesCoefficient = 1.5f;
     public int numberOfRounds; // 0 for infinite
     public int currentRound;
     public int roundTimer;
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void UnpauseState()
     {
         reticle.SetActive(true);
-            
+
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         {
             activeMenu.SetActive(false);
             activeMenu = null;
-        }        
+        }
     }
 
     public void UpdateGameGoal(int value)

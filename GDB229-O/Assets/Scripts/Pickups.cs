@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Pickups : MonoBehaviour
 {
-
-    [SerializeField] GameObject model;
-    [SerializeField] float speed = .2f;
+    [SerializeField] float rotateSpeed = .2f;
 
     private void Update()
     {
@@ -28,7 +26,7 @@ public class Pickups : MonoBehaviour
 
     public void rotateobject()
     {
-        transform.Rotate(0, speed, 0, Space.Self);
+        transform.Rotate(0, rotateSpeed, 0, Space.Self);
     }
 
     public void increasehealth(int amount)

@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Player Spawn Position
-  - Pick up
+  - health
+  - Ammo
   layers:
   - Default
   - TransparentFX
