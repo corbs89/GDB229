@@ -49,6 +49,11 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.playerController.IncrementPoints(100);
     }
+    public void ShakeCamera()
+    {
+        Resume();
+        CameraControls.instance.CameraShake(30, 0.5f);
+    }
     public static void LoadLevel(int sceneNumber)
     {
         Debug.Log("Loading scene");
@@ -65,8 +70,10 @@ public class ButtonFunctions : MonoBehaviour
                 SceneManager.LoadScene("Map 2");
                 break;
             case 3:
+                SceneManager.LoadScene("Map 3");
                 break;
             case 4:
+                SceneManager.LoadScene("Map 4");
                 break;
 
         }

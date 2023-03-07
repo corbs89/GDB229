@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] bool isTarget;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
@@ -26,7 +27,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
 
     public void TakeDamage(int damage)
@@ -34,7 +35,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP -= damage;
         StartCoroutine(FlashMat());
 
-        if (HP <= 0)
+        if (HP <= 0 && isTarget == false)
         {
             StartCoroutine(FlashMat());
             StartCoroutine(DestroyObject());
