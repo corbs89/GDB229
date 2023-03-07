@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 419273ca2f5f11441877d30f3d2fa402, type: 3}
-  m_Name: Placeholder
+  m_Name: ARWeapon
   m_EditorClassIdentifier: 
-  damage: 100
-  fireRate: 60
+  damage: 34
+  fireRate: 600
   magSize: 30
-  reserveSize: 200
-  range: 200
+  reserveSize: 240
+  range: 75
   weaponClass: 50
