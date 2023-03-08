@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI magazineText;
     public TextMeshProUGUI ammoReserveText;
+    public GameObject reserveWarning;
     public GameObject weaponName;
     public TextMeshProUGUI weaponNameText;
     public float weaponNameTimer;
@@ -150,6 +151,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(weaponNameTimer);
 
         weaponName.SetActive(false);
+    }
+    public IEnumerator FlashReservewarning()
+    {
+        reserveWarning.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        reserveWarning.SetActive(false);
     }
 
     public IEnumerator StartReloadMeter()

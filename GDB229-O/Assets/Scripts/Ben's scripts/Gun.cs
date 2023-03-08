@@ -73,7 +73,7 @@ public class Gun : MonoBehaviour
         if(CurrentReserveCount <= 0)
         {
             Debug.Log("Reserves Empty");
-            
+            StartCoroutine( GameManager.instance.FlashReservewarning());
         }
         else if(CurrentReserveCount < bulletsShot)
         {
@@ -138,6 +138,7 @@ public class Gun : MonoBehaviour
         }
         UpdateUI();
     }
+
 
     public int GetDamage() { return data.damage; }
     public int GetWeight() { return (int) data.weaponClass; }
