@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -56,28 +58,26 @@ public class Gun : MonoBehaviour
     {
         int bulletsShot = data.magSize - CurrentMagCount;
         Debug.Log("Bullets shot: " + bulletsShot);
-        if(CurrentReserveCount > 0)
+        if(CurrentReserveCount <= 0)
         {
-            if(CurrentReserveCount < data.magSize)
-            {
-                CurrentMagCount += bulletsShot;
-                CurrentReserveCount -= bulletsShot;
-                Debug.Log(CurrentMagCount);
-            }
-            else
-            {
-                CurrentMagCount = data.magSize;
-                CurrentReserveCount -= bulletsShot;
-            }
-
+            Debug.Log("Reserves Empty");
+            
+        }
+        else if(CurrentReserveCount < bulletsShot)
+        {
+            CurrentMagCount += CurrentReserveCount;
+            CurrentReserveCount = 0;
+            Debug.Log(CurrentMagCount);
         }
         else
         {
-            Debug.Log("Reserves Empty");
+            CurrentMagCount += bulletsShot;
+            CurrentReserveCount -= bulletsShot;
         }
+
         Debug.Log("Reserve Count: " + CurrentReserveCount);
-        GameManager.instance.UpdateReserve(CurrentReserveCount);
-        GameManager.instance.UpdateMagazine(CurrentMagCount);
+        UpdateUI();
+
     }
 
     IEnumerator Shoot()
@@ -104,7 +104,7 @@ public class Gun : MonoBehaviour
         isShooting = false;
 
     }
-    void UpdateUI()
+    public void UpdateUI()
     {
         GameManager.instance.UpdateMagazine(CurrentMagCount);
         GameManager.instance.UpdateReserve(CurrentReserveCount);
