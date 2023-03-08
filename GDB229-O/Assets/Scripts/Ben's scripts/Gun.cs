@@ -20,6 +20,8 @@ public class Gun : MonoBehaviour
     [SerializeField] GunData data;
     [SerializeField] Transform weaponSnap;
     bool isShooting;
+    bool canShoot;
+    float reloadSpeed;
     int CurrentMagCount;
     int CurrentReserveCount;
     int MaxMagCount;
@@ -32,7 +34,8 @@ public class Gun : MonoBehaviour
         MaxMagCount= data.magSize;
         CurrentReserveCount = MaxReserveCount;
         CurrentMagCount = MaxMagCount;
-
+        reloadSpeed = data.reloadSpeed;
+        canShoot = true;
         float rps = data.fireRate / 60;
         TimeBetweenShots = 1 / rps;
         UpdateUI();
@@ -40,23 +43,30 @@ public class Gun : MonoBehaviour
     }
     void Update()
    {
-        if (!isShooting && Input.GetButton("Shoot") && CurrentMagCount > 0)
+        if(canShoot)
         {
-            Debug.Log("isShooting!");
-            StartCoroutine(Shoot());
-        }
-        else if(CurrentMagCount <= 0 && Input.GetButton("Shoot"))
-        {
-            Reload();
-        }
-        if(Input.GetButtonDown("Reload"))
-        {
-            Reload();
+            if (!isShooting && Input.GetButton("Shoot") && CurrentMagCount > 0)
+            {
+                Debug.Log("isShooting!");
+                StartCoroutine(Shoot());
+            }
+            else if (CurrentMagCount <= 0 && Input.GetButton("Shoot"))
+            {
+               StartCoroutine( Reload());
+            }
+            if (Input.GetButtonDown("Reload"))
+            {
+                StartCoroutine(Reload());
+            }
         }
 
     }
-    void Reload()
+    IEnumerator Reload()
     {
+        canShoot = false;
+
+        yield return new WaitForSecondsRealtime(reloadSpeed);
+        
         int bulletsShot = data.magSize - CurrentMagCount;
         Debug.Log("Bullets shot: " + bulletsShot);
         if(CurrentReserveCount <= 0)
@@ -78,7 +88,7 @@ public class Gun : MonoBehaviour
 
         Debug.Log("Reserve Count: " + CurrentReserveCount);
         UpdateUI();
-
+        canShoot= true;
     }
 
     IEnumerator Shoot()
@@ -112,9 +122,23 @@ public class Gun : MonoBehaviour
     }
     public void AddAmmo(int _ammoToAdd)
     {
-         
+        if(_ammoToAdd + CurrentReserveCount >= MaxReserveCount)
+        {
+            int canTake = MaxReserveCount- CurrentReserveCount;
+            if (canTake > 0) 
+            {
+                CurrentReserveCount += canTake;
+            }
+        }
+        else 
+        {
+            CurrentReserveCount += _ammoToAdd;
+            
+        }
+        UpdateUI();
     }
 
     public int GetDamage() { return data.damage; }
     public int GetWeight() { return (int) data.weaponClass; }
+    public float GetReloadSpeed() { return data.reloadSpeed; }
 }

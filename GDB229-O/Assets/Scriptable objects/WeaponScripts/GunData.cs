@@ -10,5 +10,6 @@ public class GunData : ScriptableObject
     [SerializeField] public int magSize;
     [SerializeField] public int reserveSize;
     [SerializeField] public int range;
+    [SerializeField] public float reloadSpeed;
     [SerializeField] public WeaponClass weaponClass;
 }
