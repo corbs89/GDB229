@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4263444811448103438}
   - component: {fileID: 4263444811448103439}
   - component: {fileID: 4934364672551600917}
+  - component: {fileID: 2280927322595333743}
   m_Layer: 0
   m_Name: Ammo Crate
   m_TagString: Ammo
@@ -112,6 +113,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 0.2
+--- !u!114 &2280927322595333743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263444811448103424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f270191fbd6bb43ab1b55f9866366f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4263444812960121962
 GameObject:
   m_ObjectHideFlags: 0

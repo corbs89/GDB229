@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         MaxReserveCount = data.reserveSize;
-        MaxMagCount= data.magSize;
+        MaxMagCount = data.magSize;
         CurrentReserveCount = MaxReserveCount;
         CurrentMagCount = MaxMagCount;
         reloadSpeed = data.reloadSpeed;
@@ -42,8 +42,8 @@ public class Gun : MonoBehaviour
 
     }
     void Update()
-   {
-        if(canShoot)
+    {
+        if (canShoot)
         {
             if (!isShooting && Input.GetButton("Shoot") && CurrentMagCount > 0)
             {
@@ -52,7 +52,7 @@ public class Gun : MonoBehaviour
             }
             else if (CurrentMagCount <= 0 && Input.GetButton("Shoot"))
             {
-               StartCoroutine( Reload());
+                StartCoroutine(Reload());
             }
             if (Input.GetButtonDown("Reload"))
             {
@@ -67,15 +67,15 @@ public class Gun : MonoBehaviour
         StartCoroutine(GameManager.instance.StartReloadMeter());
 
         yield return new WaitForSecondsRealtime(reloadSpeed);
-        
+
         int bulletsShot = data.magSize - CurrentMagCount;
         Debug.Log("Bullets shot: " + bulletsShot);
-        if(CurrentReserveCount <= 0)
+        if (CurrentReserveCount <= 0)
         {
             Debug.Log("Reserves Empty");
-            StartCoroutine( GameManager.instance.FlashReservewarning());
+            StartCoroutine(GameManager.instance.FlashReservewarning());
         }
-        else if(CurrentReserveCount < bulletsShot)
+        else if (CurrentReserveCount < bulletsShot)
         {
             CurrentMagCount += CurrentReserveCount;
             CurrentReserveCount = 0;
@@ -89,7 +89,7 @@ public class Gun : MonoBehaviour
 
         Debug.Log("Reserve Count: " + CurrentReserveCount);
         UpdateUI();
-        canShoot= true;
+        canShoot = true;
     }
 
     IEnumerator Shoot()
@@ -103,7 +103,7 @@ public class Gun : MonoBehaviour
         Debug.Log("currentMag: " + CurrentMagCount);
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, data.range))
         {
-            
+
 
             if (hit.collider.GetComponent<IDamage>() != null)
             {
@@ -123,24 +123,22 @@ public class Gun : MonoBehaviour
     }
     public void AddAmmo(int _ammoToAdd)
     {
-        if(_ammoToAdd + CurrentReserveCount >= MaxReserveCount)
+        if (_ammoToAdd + CurrentReserveCount >= MaxReserveCount)
         {
-            int canTake = MaxReserveCount- CurrentReserveCount;
-            if (canTake > 0) 
+            int canTake = MaxReserveCount - CurrentReserveCount;
+            if (canTake > 0)
             {
                 CurrentReserveCount += canTake;
             }
         }
-        else 
+        else
         {
             CurrentReserveCount += _ammoToAdd;
-            
         }
         UpdateUI();
     }
 
-
     public int GetDamage() { return data.damage; }
-    public int GetWeight() { return (int) data.weaponClass; }
+    public int GetWeight() { return (int)data.weaponClass; }
     public float GetReloadSpeed() { return data.reloadSpeed; }
 }
