@@ -5,24 +5,47 @@ using UnityEngine;
 public class dummyMovement : MonoBehaviour
 {
 
-    [Range(1, 10)][SerializeField] int movementSpeed;
-    Vector3 position;
+    public float speed;
+    private bool isMovingLeft;
+    private bool isMovingRight;
 
-    private void Start() {
-       position = transform.position;
+    private void Start()
+    {
+        isMovingLeft = true;
+        isMovingRight = false;
     }
-    
     private void Update()
     {
-
-        transform.Translate(-1 * movementSpeed * Time.deltaTime, 0, 0, Space.Self);
-
-        if (transform.position.x < -5)
+        if (isMovingLeft == true)
         {
-
-            transform.Translate(1 * movementSpeed * Time.deltaTime, 0, 0, Space.Self);
-
+            Moveleft();
+            if (transform.position.x <= -5)
+            {
+                isMovingLeft = false;
+                isMovingRight = true;
+            }
+        }
+        else
+        {
+            Moveright();
+            if (transform.position.x >= 5)
+            {
+                isMovingRight = false;
+                isMovingLeft = true;
+                Moveleft();
+            }
         }
     }
-}
 
+
+    private void Moveleft()
+    {
+        transform.Translate(-1 * speed * Time.deltaTime, 0, 0, Space.Self);
+
+    }
+    private void Moveright()
+    {
+        transform.Translate(1 * speed * Time.deltaTime, 0, 0, Space.Self);
+    }
+
+}

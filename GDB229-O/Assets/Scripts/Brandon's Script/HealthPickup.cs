@@ -5,7 +5,6 @@ using UnityEngine;
 public class HealthPickup : MonoBehaviour
 {
     [SerializeField] int refillHealthAmount = 10;
-    [SerializeField] float rotateSpeed = .2f;
 
     private void OnTriggerEnter(Collider other)
     {
