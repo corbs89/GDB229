@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     Vector3 movement;
     Vector3 playerVelocity;
     int points;
+    bool canSwitchWeapon = true;
 
     Gun slot1;
     Gun slot2;

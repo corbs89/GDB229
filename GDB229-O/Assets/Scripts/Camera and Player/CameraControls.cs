@@ -17,7 +17,6 @@ public class CameraControls : MonoBehaviour
     [Header("-----Invert-----")]
     [SerializeField] bool invertY;
 
-    float shakeDuration = 0.01f;
     float shakeMagnitudeMultiplier = 0.01f;
 
     float xRotation;
