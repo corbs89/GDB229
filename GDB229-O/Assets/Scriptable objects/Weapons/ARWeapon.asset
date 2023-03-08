@@ -17,4 +17,5 @@ MonoBehaviour:
   magSize: 30
   reserveSize: 240
   range: 75
+  reloadSpeed: 2
   weaponClass: 50

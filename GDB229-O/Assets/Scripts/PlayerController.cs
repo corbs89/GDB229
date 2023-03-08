@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     Vector3 movement;
     Vector3 playerVelocity;
     int points;
-    bool canSwitchWeapon = true;
+    public bool canSwitchWeapon = true;
 
     Gun slot1;
     Gun slot2;
@@ -62,6 +62,10 @@ public class PlayerController : MonoBehaviour
 
         slot1.transform.localPosition = Vector3.zero;
         slot2.transform.localPosition = Vector3.zero;
+
+        string stringToReplace = "(Clone)";
+        slot1.transform.name = slot1.transform.name.Replace(stringToReplace, "");
+        slot2.transform.name = slot2.transform.name.Replace(stringToReplace, "");
 
         slot1.enabled = false;
         slot2.enabled = false;
@@ -167,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
     void EquipLastWeapon ()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
             equippedWeapon.enabled = false;
 
@@ -188,9 +192,8 @@ public class PlayerController : MonoBehaviour
             equippedWeapon.UpdateUI();
             StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
         }
-        
-        
     }
+
     public void SpawnPlayer()
     {
         HP = originalHP;
@@ -228,5 +231,10 @@ public class PlayerController : MonoBehaviour
     void ToggleStaminaPie(bool value)
     {
         GameManager.instance.staminaFill.enabled = value;
+    }
+
+    public void ToggleCanSwitchWeapon(bool value)
+    {
+        canSwitchWeapon = value;
     }
 }

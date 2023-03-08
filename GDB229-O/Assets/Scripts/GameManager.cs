@@ -151,17 +151,21 @@ public class GameManager : MonoBehaviour
         weaponName.SetActive(false);
     }
 
-    public void StartReloadMeter()
+    public IEnumerator StartReloadMeter()
     {
         float timeSpentReloading = 0f;
+        float reloadSpeed = playerController.equippedWeapon.GetReloadSpeed();
+        playerController.ToggleCanSwitchWeapon(false);
 
-        while (timeSpentReloading < 1f)
+        while (timeSpentReloading < reloadSpeed)
         {
             timeSpentReloading += Time.deltaTime;
+            reloadMeter.fillAmount = timeSpentReloading / reloadSpeed;
 
-            reloadMeter.fillAmount = timeSpentReloading / 1f;
+            yield return new WaitForEndOfFrame();
         }
 
         reloadMeter.fillAmount = 0f;
+        playerController.ToggleCanSwitchWeapon(true);
     }
 }

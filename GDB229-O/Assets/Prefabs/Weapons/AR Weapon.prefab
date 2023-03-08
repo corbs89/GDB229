@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 6889515302158343865}
   - component: {fileID: 1291233709316864030}
   m_Layer: 0
-  m_Name: Rifle 3
+  m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,3 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 7d091151142cc30498bcc28f54f44859, type: 2}
+  weaponSnap: {fileID: 0}

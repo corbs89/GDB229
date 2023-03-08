@@ -35,7 +35,7 @@ RectTransform:
   - {fileID: 2915606537895246705}
   - {fileID: 5609015258111793118}
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -380,7 +380,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -406,6 +406,7 @@ MonoBehaviour:
   reticle: {fileID: 2098257378048670051}
   hpFill: {fileID: 4968829360920901166}
   staminaFill: {fileID: 1739821840046901474}
+  reloadMeter: {fileID: 1562913905727630339}
   pointsText: {fileID: 2651388072439932454}
   magazineText: {fileID: 7015158213229657253}
   ammoReserveText: {fileID: 1790846760627051638}
@@ -541,7 +542,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1218,6 +1219,7 @@ RectTransform:
   - {fileID: 1385661746018969056}
   - {fileID: 3844449660152535698}
   - {fileID: 6944273108466462101}
+  - {fileID: 8153984418147170893}
   - {fileID: 2098257378048670050}
   - {fileID: 2098257378106858312}
   - {fileID: 1822679747530343712}
@@ -1324,10 +1326,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8153984418147170893}
+  m_Children: []
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1403,7 +1404,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098257378106858318
 MonoBehaviour:
@@ -3108,7 +3109,7 @@ RectTransform:
   m_Children:
   - {fileID: 5527084171338413260}
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3730,7 +3731,7 @@ RectTransform:
   - {fileID: 774535804224857554}
   - {fileID: 2961594399984544613}
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5073,7 +5074,7 @@ GameObject:
   - component: {fileID: 9132777053152756175}
   - component: {fileID: 1562913905727630339}
   m_Layer: 5
-  m_Name: Reload Reticle
+  m_Name: Reload Meter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5086,13 +5087,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8650768023138218709}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2098257378048670050}
-  m_RootOrder: 0
+  m_Father: {fileID: 2098257377566597402}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5132,7 +5133,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillAmount: 0.278
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -5576,7 +5577,7 @@ RectTransform:
   - {fileID: 549123527891585275}
   - {fileID: 4148737063831331527}
   m_Father: {fileID: 2098257377566597402}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

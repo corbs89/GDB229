@@ -64,6 +64,7 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         canShoot = false;
+        StartCoroutine(GameManager.instance.StartReloadMeter());
 
         yield return new WaitForSecondsRealtime(reloadSpeed);
         
