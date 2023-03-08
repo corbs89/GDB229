@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         HP -= damage;
         UpdateHPUI();
+        StartCoroutine(GameManager.instance.playerHit());
 
         if (HP <= 0) GameManager.instance.PlayerDead();
     }
