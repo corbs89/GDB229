@@ -53,17 +53,13 @@ public class PlayerController : MonoBehaviour
         UpdateHPUI();
         SpawnPlayer();
 
-        gunPosition.transform.Rotate(new Vector3(0, -90, 0));
-
         slot1 = Instantiate(weaponSlot1.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
         slot2 = Instantiate(weaponSlot2.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
 
         slot1Renderer = slot1.GetComponent<Renderer>();
         slot2Renderer = slot2.GetComponent<Renderer>();
 
-        slot1.transform.localScale = Vector3.one;
         slot1.transform.localPosition = Vector3.zero;
-        slot2.transform.localScale = Vector3.one;
         slot2.transform.localPosition = Vector3.zero;
 
         slot1.enabled = false;
