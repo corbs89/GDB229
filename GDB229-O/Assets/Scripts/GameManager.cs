@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject reticle;
     public Image hpFill;
     public Image staminaFill;
+    public Image reloadMeter;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI magazineText;
     public TextMeshProUGUI ammoReserveText;
