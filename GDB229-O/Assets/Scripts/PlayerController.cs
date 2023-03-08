@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [Header("-----Components-----")]
     [SerializeField] CharacterController characterController;
 
+    [Header("-----Objects-----")]
+    [SerializeField] GameObject gunPosition;
+
     [Header("-----Player Stats-----")]
     [SerializeField] int HP;
     [SerializeField] float stamina;
@@ -20,9 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(10, 75)] int gravity;
 
     [Header("-----Gun Stats-----")]
-    [SerializeField] Gun weaponSlot1;
-    [SerializeField] Gun weaponSlot2;
-    [SerializeField] Gun equippedWeapon;
+    [SerializeField] GameObject weaponSlot1;
+    [SerializeField] GameObject weaponSlot2;
     [SerializeField][Range(0f, 10f)] float weightModifier;
 
 
@@ -33,6 +35,12 @@ public class PlayerController : MonoBehaviour
     Vector3 movement;
     Vector3 playerVelocity;
     int points;
+
+    Gun slot1;
+    Gun slot2;
+    Renderer slot1Renderer;
+    Renderer slot2Renderer;
+    public Gun equippedWeapon;
     
     public int GetHP() { return HP; }
     public float GetStamina() { return stamina; }
@@ -44,6 +52,26 @@ public class PlayerController : MonoBehaviour
         staminaMax = stamina;
         UpdateHPUI();
         SpawnPlayer();
+
+        gunPosition.transform.Rotate(new Vector3(0, -90, 0));
+
+        slot1 = Instantiate(weaponSlot1.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
+        slot2 = Instantiate(weaponSlot2.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
+
+        slot1Renderer = slot1.GetComponent<Renderer>();
+        slot2Renderer = slot2.GetComponent<Renderer>();
+
+        slot1.transform.localScale = Vector3.one;
+        slot1.transform.localPosition = Vector3.zero;
+        slot2.transform.localScale = Vector3.one;
+        slot2.transform.localPosition = Vector3.zero;
+
+        slot1.enabled = false;
+        slot2.enabled = false;
+        slot2Renderer.enabled = false;
+
+        equippedWeapon = slot1;
+        equippedWeapon.enabled = true;
     }
 
 
@@ -144,9 +172,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (equippedWeapon == weaponSlot1) equippedWeapon = weaponSlot2;
-            else if (equippedWeapon == weaponSlot2) equippedWeapon = weaponSlot1;
+            equippedWeapon.enabled = false;
 
+            if (equippedWeapon == slot1)
+            {
+                slot1Renderer.enabled = false;
+                slot2Renderer.enabled = true;
+                equippedWeapon = slot2;
+            }
+            else if (equippedWeapon == slot2)
+            {
+                slot1Renderer.enabled = true;
+                slot2Renderer.enabled = false;
+                equippedWeapon = slot1;
+            }
+
+            equippedWeapon.enabled = true;
+            equippedWeapon.UpdateUI();
             StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
         }
         
