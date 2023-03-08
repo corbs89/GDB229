@@ -12,11 +12,14 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
+    [SerializeField] int playerFaceSpeed;
     [SerializeField] float attackSpeed;
     [SerializeField] int attackRange;
     [SerializeField] GameObject projectile;
     [SerializeField] int projectileSpeed;
     [SerializeField] Transform shootPos;
+
+    Vector3 playerDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,23 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        setEnemyMovement();
+    }
+
+    void setEnemyMovement()
+    {
         agent.SetDestination(GameManager.instance.player.transform.position);
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            facePlayer();
+        }
+    }
+
+    void facePlayer()
+    {
+        playerDirection.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(playerDirection);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
     }
 
     public void TakeDamage(int damage)
@@ -39,7 +58,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             StartCoroutine(FlashMat());
             StartCoroutine(DestroyObject());
-            
         }
     }
 

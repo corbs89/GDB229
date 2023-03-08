@@ -7,15 +7,16 @@ TagManager:
   - Player Spawn Position
   - health
   - Ammo
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Enemy Projectile
   - 
   - 
   - 
