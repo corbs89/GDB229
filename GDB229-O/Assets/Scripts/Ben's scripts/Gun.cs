@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
 {
 
     [SerializeField] GunData data;
+    [SerializeField] Transform weaponSnap;
     bool isShooting;
     int CurrentMagCount;
     int CurrentReserveCount;
@@ -108,6 +109,10 @@ public class Gun : MonoBehaviour
     {
         GameManager.instance.UpdateMagazine(CurrentMagCount);
         GameManager.instance.UpdateReserve(CurrentReserveCount);
+    }
+    public void AddAmmo(int _ammoToAdd)
+    {
+         
     }
 
     public int GetDamage() { return data.damage; }
