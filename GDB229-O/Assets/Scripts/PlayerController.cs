@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(10, 75)] int gravity;
 
     [Header("-----Gun Stats-----")]
-    [SerializeField] GameObject weaponSlot1;
-    [SerializeField] GameObject weaponSlot2;
+    [SerializeField] GameObject weaponSlot1Object;
+    [SerializeField] GameObject weaponSlot2Object;
     [SerializeField][Range(0f, 10f)] float weightModifier;
 
 
@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
     int points;
     public bool canSwitchWeapon = true;
 
-    Gun slot1;
-    Gun slot2;
+    Gun weaponSlot1;
+    Gun weaponSlot2;
     Renderer slot1Renderer;
     Renderer slot2Renderer;
     public Gun equippedWeapon;
@@ -54,25 +54,11 @@ public class PlayerController : MonoBehaviour
         UpdateHPUI();
         SpawnPlayer();
 
-        slot1 = Instantiate(weaponSlot1.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
-        slot2 = Instantiate(weaponSlot2.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
+        EquipWeaponInSlot2(weaponSlot2Object);
+        EquipWeaponInSlot1(weaponSlot1Object);
 
-        slot1Renderer = slot1.GetComponent<Renderer>();
-        slot2Renderer = slot2.GetComponent<Renderer>();
-
-        slot1.transform.localPosition = Vector3.zero;
-        slot2.transform.localPosition = Vector3.zero;
-
-        string stringToReplace = "(Clone)";
-        slot1.transform.name = slot1.transform.name.Replace(stringToReplace, "");
-        slot2.transform.name = slot2.transform.name.Replace(stringToReplace, "");
-
-        slot1.enabled = false;
-        slot2.enabled = false;
+        weaponSlot2.enabled = false;
         slot2Renderer.enabled = false;
-
-        equippedWeapon = slot1;
-        equippedWeapon.enabled = true;
     }
 
 
@@ -82,7 +68,7 @@ public class PlayerController : MonoBehaviour
         ProcessMovement();
         ProcessJump();
         IncrementStamina();
-        EquipLastWeapon();
+        SwapWeapons();
 
         timeSinceUsedStamina += Time.deltaTime;
     }
@@ -159,33 +145,59 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Time.deltaTime * playerVelocity);
     }
 
-    void EquipWeapon(Gun weapon)
+    void EquipWeaponInSlot1(GameObject newWeapon)
     {
-        if (weapon != null)
-        {
-            equippedWeapon = weapon;
-            StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
-        }
+        weaponSlot1Object = newWeapon;
+
+        weaponSlot1 = Instantiate(weaponSlot1Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform); 
+
+        slot1Renderer = weaponSlot1.GetComponent<Renderer>();
+
+        weaponSlot1.transform.localPosition = Vector3.zero;
+
+        string stringToReplace = "(Clone)";
+        weaponSlot1.transform.name = weaponSlot1.transform.name.Replace(stringToReplace, "");
+
+        equippedWeapon = weaponSlot1;
+        
+        equippedWeapon.enabled = true;
+    }
+
+    void EquipWeaponInSlot2(GameObject newWeapon)
+    {
+        weaponSlot2Object = newWeapon;
+
+        weaponSlot2 = Instantiate(weaponSlot2Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
+
+        slot2Renderer = weaponSlot2.GetComponent<Renderer>();
+
+        weaponSlot2.transform.localPosition = Vector3.zero;
+
+        string stringToReplace = "(Clone)";
+        weaponSlot2.transform.name = weaponSlot2.transform.name.Replace(stringToReplace, "");
+
+        equippedWeapon = weaponSlot2;
+        equippedWeapon.enabled = true;
     }
 
 
-    void EquipLastWeapon ()
+    void SwapWeapons ()
     {
         if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
             equippedWeapon.enabled = false;
 
-            if (equippedWeapon == slot1)
+            if (equippedWeapon == weaponSlot1)
             {
                 slot1Renderer.enabled = false;
                 slot2Renderer.enabled = true;
-                equippedWeapon = slot2;
+                equippedWeapon = weaponSlot2;
             }
-            else if (equippedWeapon == slot2)
+            else if (equippedWeapon == weaponSlot2)
             {
                 slot1Renderer.enabled = true;
                 slot2Renderer.enabled = false;
-                equippedWeapon = slot1;
+                equippedWeapon = weaponSlot1;
             }
 
             equippedWeapon.enabled = true;

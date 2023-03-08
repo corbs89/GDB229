@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartNextRound());
+        reloadMeter.fillAmount = 0f;
     }
 
     void Update()
