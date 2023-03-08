@@ -149,6 +149,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(weaponNameTimer);
 
         weaponName.SetActive(false);
+    }
 
+    public void StartReloadMeter()
+    {
+        float timeSpentReloading = 0f;
+
+        while (timeSpentReloading < 1f)
+        {
+            timeSpentReloading += Time.deltaTime;
+
+            reloadMeter.fillAmount = timeSpentReloading / 1f;
+        }
+
+        reloadMeter.fillAmount = 0f;
     }
 }
