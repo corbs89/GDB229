@@ -34,25 +34,10 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.playerController.SpawnPlayer();
     }
 
-    public void ReduceEnemiesRemaining()
-    {
-        Resume();
-        GameManager.instance.UpdateGameGoal(-100);
-    }
-
     public void ReduceHP()
     {
         Resume();
         GameManager.instance.playerController.TakeDamage(5);
-    }
-    public void AddPoints()
-    {
-        GameManager.instance.playerController.IncrementPoints(100);
-    }
-    public void ShakeCamera()
-    {
-        Resume();
-        CameraControls.instance.CameraShake(30, 0.5f);
     }
     public static void LoadLevel(int sceneNumber)
     {

@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("-----Gun Stats-----")]
-    [SerializeField] GameObject weaponSlot1Object;
-    [SerializeField] GameObject weaponSlot2Object;
     [SerializeField][Range(0f, 10f)] float weightModifier;
 
 
@@ -38,17 +36,15 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     int points;
     public bool canSwitchWeapon = true;
-
-
-    Gun weaponSlot1;
-    Gun weaponSlot2;
-    Renderer slot1Renderer;
-    Renderer slot2Renderer;
+    
     public Gun equippedWeapon;
 
     public int GetHP() { return HP; }
     public float GetStamina() { return stamina; }
     public int GetPoints() { return points; }
+    public GameObject GetGunPosition() { return gunPosition; }
+
+    public Gun GetEquippedWeapon() {  return equippedWeapon; }
 
     void Start()
     {
@@ -56,12 +52,6 @@ public class PlayerController : MonoBehaviour
         staminaMax = stamina;
         UpdateHPUI();
         SpawnPlayer();
-
-        EquipWeaponInSlot2(weaponSlot2Object);
-        EquipWeaponInSlot1(weaponSlot1Object);
-
-        weaponSlot2.enabled = false;
-        slot2Renderer.enabled = false;
     }
 
 
@@ -148,59 +138,25 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Time.deltaTime * playerVelocity);
     }
 
-    void EquipWeaponInSlot1(GameObject newWeapon)
-    {
-        weaponSlot1Object = newWeapon;
-
-        weaponSlot1 = Instantiate(weaponSlot1Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
-
-        slot1Renderer = weaponSlot1.GetComponent<Renderer>();
-
-        weaponSlot1.transform.localPosition = Vector3.zero;
-
-        string stringToReplace = "(Clone)";
-        weaponSlot1.transform.name = weaponSlot1.transform.name.Replace(stringToReplace, "");
-
-        equippedWeapon = weaponSlot1;
-
-        equippedWeapon.enabled = true;
-    }
-
-    void EquipWeaponInSlot2(GameObject newWeapon)
-    {
-        weaponSlot2Object = newWeapon;
-
-        weaponSlot2 = Instantiate(weaponSlot2Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
-
-        slot2Renderer = weaponSlot2.GetComponent<Renderer>();
-
-        weaponSlot2.transform.localPosition = Vector3.zero;
-
-        string stringToReplace = "(Clone)";
-        weaponSlot2.transform.name = weaponSlot2.transform.name.Replace(stringToReplace, "");
-
-        equippedWeapon = weaponSlot2;
-        equippedWeapon.enabled = true;
-    }
-
-
     void SwapWeapons()
     {
+        if (equippedWeapon == null) return;
+
         if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
             equippedWeapon.enabled = false;
 
-            if (equippedWeapon == weaponSlot1)
+            if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
             {
-                slot1Renderer.enabled = false;
-                slot2Renderer.enabled = true;
-                equippedWeapon = weaponSlot2;
+                LoadoutManager.instance.slot1Renderer.enabled = false;
+                LoadoutManager.instance.slot2Renderer.enabled = true;
+                equippedWeapon = LoadoutManager.instance.weaponSlot2;
             }
-            else if (equippedWeapon == weaponSlot2)
+            else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
             {
-                slot1Renderer.enabled = true;
-                slot2Renderer.enabled = false;
-                equippedWeapon = weaponSlot1;
+                LoadoutManager.instance.slot1Renderer.enabled = true;
+                LoadoutManager.instance.slot2Renderer.enabled = false;
+                equippedWeapon = LoadoutManager.instance.weaponSlot1;
             }
 
             equippedWeapon.enabled = true;
