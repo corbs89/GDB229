@@ -111,8 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6c387d377c9b04eb449d4997c1febe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  speed: 0.2
+  rotateSpeed: 0.2
+  refillAmmoAmount: 30
+  weapon: {fileID: 0}
+  weaponLocation: {fileID: 0}
+  refillHealthAmount: 50
 --- !u!1 &7513513880091008636
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +128,7 @@ GameObject:
   - component: {fileID: 7513513880091008632}
   - component: {fileID: 7513513880091008633}
   - component: {fileID: 7513513880091008634}
-  - component: {fileID: 8214614648620091660}
+  - component: {fileID: 1638660513}
   m_Layer: 0
   m_Name: Health
   m_TagString: health
@@ -140,9 +143,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7513513880091008636}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.0004, y: 0.707, z: 0}
-  m_LocalScale: {x: 0.5312707, y: 0.5312707, z: 0.5312707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7513513879216810676}
@@ -212,7 +215,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8214614648620091660
+--- !u!114 &1638660513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,11 +224,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7513513880091008636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6c387d377c9b04eb449d4997c1febe, type: 3}
+  m_Script: {fileID: 11500000, guid: d3bc21b6b3972f14cb245c3c5b5544c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  speed: 0.2
+  refillHealthAmount: 10
 --- !u!1 &7513513880590503365
 GameObject:
   m_ObjectHideFlags: 0

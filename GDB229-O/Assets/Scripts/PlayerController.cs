@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(5, 50)] int jumpSpeed;
     [SerializeField][Range(10, 75)] int gravity;
 
+
+
     [Header("-----Gun Stats-----")]
     [SerializeField] GameObject weaponSlot1Object;
     [SerializeField] GameObject weaponSlot2Object;
@@ -37,12 +39,13 @@ public class PlayerController : MonoBehaviour
     int points;
     public bool canSwitchWeapon = true;
 
+
     Gun weaponSlot1;
     Gun weaponSlot2;
     Renderer slot1Renderer;
     Renderer slot2Renderer;
     public Gun equippedWeapon;
-    
+
     public int GetHP() { return HP; }
     public float GetStamina() { return stamina; }
     public int GetPoints() { return points; }
@@ -149,7 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         weaponSlot1Object = newWeapon;
 
-        weaponSlot1 = Instantiate(weaponSlot1Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform); 
+        weaponSlot1 = Instantiate(weaponSlot1Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
 
         slot1Renderer = weaponSlot1.GetComponent<Renderer>();
 
@@ -159,7 +162,7 @@ public class PlayerController : MonoBehaviour
         weaponSlot1.transform.name = weaponSlot1.transform.name.Replace(stringToReplace, "");
 
         equippedWeapon = weaponSlot1;
-        
+
         equippedWeapon.enabled = true;
     }
 
@@ -181,7 +184,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void SwapWeapons ()
+    void SwapWeapons()
     {
         if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
@@ -230,7 +233,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.pointsText.text = "Points: " + points.ToString("000000000");
     }
 
-    void UpdateHPUI()
+    public void UpdateHPUI()
     {
         GameManager.instance.hpFill.fillAmount = (float)HP / originalHP;
     }
@@ -249,4 +252,20 @@ public class PlayerController : MonoBehaviour
     {
         canSwitchWeapon = value;
     }
+
+    public void increasehealth(int amount)
+    {
+        HP += amount;
+        UpdateHPUI();
+
+        if (HP > originalHP)
+        {
+            HP = originalHP;
+        }
+    }
+
+
+
+
+
 }
