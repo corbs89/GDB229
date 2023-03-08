@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         ProcessMovement();
         ProcessJump();
         IncrementStamina();
+        EquipLastWeapon();
 
         timeSinceUsedStamina += Time.deltaTime;
     }
@@ -138,6 +139,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    void EquipLastWeapon ()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (equippedWeapon == weaponSlot1) equippedWeapon = weaponSlot2;
+            else if (equippedWeapon == weaponSlot2) equippedWeapon = weaponSlot1;
+
+            StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
+        }
+        
+        
+    }
     public void SpawnPlayer()
     {
         HP = originalHP;
