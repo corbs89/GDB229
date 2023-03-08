@@ -256,12 +256,13 @@ public class PlayerController : MonoBehaviour
     public void increasehealth(int amount)
     {
         HP += amount;
-        UpdateHPUI();
 
         if (HP > originalHP)
         {
             HP = originalHP;
         }
+
+        UpdateHPUI();
     }
 
 
