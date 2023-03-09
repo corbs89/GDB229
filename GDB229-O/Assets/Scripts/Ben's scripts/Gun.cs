@@ -138,6 +138,15 @@ public class Gun : MonoBehaviour
         UpdateUI();
     }
 
+    public void refillAmmo()
+    {
+        CurrentMagCount = MaxMagCount;
+        CurrentReserveCount = MaxReserveCount;
+        UpdateUI();
+    }
+
+
+
     public int GetDamage() { return data.damage; }
     public int GetWeight() { return (int)data.weaponClass; }
     public float GetReloadSpeed() { return data.reloadSpeed; }
