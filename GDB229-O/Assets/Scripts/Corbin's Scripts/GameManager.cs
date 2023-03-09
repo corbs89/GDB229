@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
@@ -55,6 +56,14 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(StartNextRound());
         reloadMeter.fillAmount = 0f;
+
+        if (playerController.equippedWeapon != null)
+        {
+            playerController.equippedWeapon.UpdateUI();
+            playerController.equippedWeapon.refillAmmo();
+        }
+
+        playerController.Reset();
     }
 
     void Update()
