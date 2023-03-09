@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator playerHit()
     {
+        CameraControls.instance.CameraShake(50, 0.0675f);
         screenFlash.SetActive(true);
         yield return new WaitForSeconds(screenFlashTimer);
         screenFlash.SetActive(false);
