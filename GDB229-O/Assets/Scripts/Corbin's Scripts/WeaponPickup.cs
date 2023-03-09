@@ -40,4 +40,11 @@ public class WeaponPickup : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator EnablePickup()
+    {
+        yield return new WaitForSeconds(3);
+
+        GetComponent<SphereCollider>().enabled = true;
+    }
 }

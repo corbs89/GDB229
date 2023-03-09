@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,11 +24,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(5, 50)] int jumpSpeed;
     [SerializeField][Range(10, 75)] int gravity;
 
-
-
     [Header("-----Gun Stats-----")]
     [SerializeField][Range(0f, 10f)] float weightModifier;
-
+    [SerializeField] GameObject PistolPickupPrefab;
+    [SerializeField] GameObject ARPickupPrefab;
+    [SerializeField] GameObject SniperPickupPrefab;
 
     int originalHP;
     float staminaMax;
@@ -185,7 +186,24 @@ public class PlayerController : MonoBehaviour
     {
         if (equippedWeapon != null && canSwitchWeapon && Input.GetKeyDown(KeyCode.G))
         {
-            // create weapon item drop instance
+
+            switch (equippedWeapon.GetWeight())
+            {
+                case 0:
+                    SpawnWeaponPickup(PistolPickupPrefab);
+                    break;
+
+                case 25:
+                    break;
+
+                case 50:
+                    SpawnWeaponPickup(ARPickupPrefab);
+                    break;
+
+                case 75:
+                    SpawnWeaponPickup(SniperPickupPrefab);
+                    break;
+            }
 
             if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
             {
@@ -196,6 +214,7 @@ public class PlayerController : MonoBehaviour
                     LoadoutManager.instance.slot2Renderer.enabled = true;
                     equippedWeapon = LoadoutManager.instance.weaponSlot2;
                     equippedWeapon.enabled = true;
+                    equippedWeapon.UpdateUI();
                     LoadoutManager.instance.slot = LoadoutManager.Slot.two;
                 }
                 else
@@ -211,6 +230,7 @@ public class PlayerController : MonoBehaviour
                     LoadoutManager.instance.slot1Renderer.enabled = true;
                     equippedWeapon = LoadoutManager.instance.weaponSlot1;
                     equippedWeapon.enabled = true;
+                    equippedWeapon.UpdateUI();
                     LoadoutManager.instance.slot = LoadoutManager.Slot.one;
                 }
                 else
@@ -219,6 +239,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void SpawnWeaponPickup(GameObject weapon)
+    {
+        GameObject item;
+
+        item = Instantiate(weapon);
+        item.transform.position = transform.position;
+        item.GetComponent<SphereCollider>().enabled = false;
+        StartCoroutine(item.GetComponent<WeaponPickup>().EnablePickup());
     }
 
     public void ClearEquippedWeapon()
@@ -231,7 +261,9 @@ public class PlayerController : MonoBehaviour
 
     void SwapWeapons()
     {
-        if (equippedWeapon != null && Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
+        if (equippedWeapon == null || LoadoutManager.instance.weaponSlot1Object == null || LoadoutManager.instance.weaponSlot2Object == null) return;
+
+        if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
             equippedWeapon.enabled = false;
 
