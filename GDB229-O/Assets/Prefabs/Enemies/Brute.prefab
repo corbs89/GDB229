@@ -382,7 +382,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4140267345638298263}
   - component: {fileID: 4075142997521384749}
-  - component: {fileID: 2053018245}
   m_Layer: 0
   m_Name: SM_Chr_ZombieBoss_Brute_01
   m_TagString: Untagged
@@ -509,29 +508,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00025480986, y: 0.88772655, z: 0.067241535}
     m_Extent: {x: 1.5175331, y: 1.00183, z: 0.48852682}
   m_DirtyAABB: 0
---- !u!114 &2053018245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4134446853946297221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3037cc6a9e5e247856e788ad49f02f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  agent: {fileID: 0}
-  headPos: {fileID: 0}
-  isTarget: 0
-  HP: 0
-  playerFaceSpeed: 0
-  attackSpeed: 0
-  attackRange: 0
-  projectile: {fileID: 0}
-  projectileSpeed: 0
-  shootPos: {fileID: 0}
 --- !u!1 &4134451224797632331
 GameObject:
   m_ObjectHideFlags: 0
