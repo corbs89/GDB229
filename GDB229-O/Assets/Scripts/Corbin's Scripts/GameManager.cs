@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     [Header("-----Game Goals-----")]
     public int enemiesRemaining;
+    public int enemiesSpawned;
+    public int enemiesMax;
     [Range(1f, 2f)] public float enemiesCoefficient = 1.5f;
     public int numberOfRounds; // 0 for infinite
     public int currentRound;
@@ -95,6 +97,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool CanSpawnEnemy()
+    {
+        if (enemiesSpawned < enemiesMax)
+        {
+            enemiesSpawned++;
+            return true;
+        }
+
+        return false;
+    }
+
     public void UpdateGameGoal(int value)
     {
         enemiesRemaining += value;
@@ -120,7 +133,7 @@ public class GameManager : MonoBehaviour
         roundStartText.SetActive(true);
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
 
-        enemiesRemaining = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
+        enemiesMax = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
 
         yield return new WaitForSeconds(roundTimer);
 
