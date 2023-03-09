@@ -46,15 +46,25 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
-        playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+        
     }
 
     void Start()
     {
         StartCoroutine(StartNextRound());
         reloadMeter.fillAmount = 0f;
+
+        if (playerController.equippedWeapon != null)
+        {
+            playerController.equippedWeapon.UpdateUI();
+            playerController.equippedWeapon.refillAmmo();
+        }
+
+        playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+        playerController.SpawnPlayer();
     }
 
     void Update()

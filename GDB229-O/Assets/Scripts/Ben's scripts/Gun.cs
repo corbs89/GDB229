@@ -54,7 +54,7 @@ public class Gun : MonoBehaviour
             {
                 StartCoroutine(Reload());
             }
-            if (Input.GetButtonDown("Reload"))
+            if (Input.GetButtonDown("Reload") && !(CurrentMagCount == MaxMagCount))
             {
                 StartCoroutine(Reload());
             }
@@ -64,6 +64,7 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         canShoot = false;
+        
         StartCoroutine(GameManager.instance.StartReloadMeter());
 
         yield return new WaitForSecondsRealtime(reloadSpeed);

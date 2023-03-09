@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     public Gun GetEquippedWeapon() {  return equippedWeapon; }
 
-    void Start()
+    void Awake()
     {
         originalHP = HP;
         staminaMax = stamina;
@@ -290,8 +291,7 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        HP = originalHP;
-        UpdateHPUI();
+        Reset();        
 
         characterController.enabled = false;
         if (GameManager.instance.playerSpawnPosition != null) transform.position = GameManager.instance.playerSpawnPosition.transform.position;
@@ -364,12 +364,16 @@ public class PlayerController : MonoBehaviour
 
             screenIsFlashing = false;
         }
-
-        
-
-
     }
 
+    public void Reset()
+    {
+        HP = originalHP;
+        points = 0;
+        stamina = staminaMax;
 
+        UpdateHPUI();
+        UpdateStaminaUI();
+    }
 
 }
