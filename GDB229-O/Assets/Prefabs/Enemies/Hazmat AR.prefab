@@ -3472,7 +3472,7 @@ MonoBehaviour:
   playerFaceSpeed: 5
   attackSpeed: 0
   attackRange: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 8319851011066866333, guid: 69a9d26fc8feea04bb7184592c216fff, type: 3}
   projectileSpeed: 0
   shootPos: {fileID: 7743327686090063101}
 --- !u!95 &6241172101234132962
