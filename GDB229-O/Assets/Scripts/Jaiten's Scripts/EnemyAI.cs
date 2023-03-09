@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
+    [SerializeField] int pointValue;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] float attackSpeed;
     [SerializeField] int attackRange;
@@ -81,6 +82,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0 && isTarget == false)
         {
             GameManager.instance.UpdateGameGoal(-1);
+            GameManager.instance.playerController.IncrementPoints(pointValue);
             Destroy(gameObject);
         }
     }
