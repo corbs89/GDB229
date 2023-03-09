@@ -8,7 +8,7 @@ public class LootDrops : MonoBehaviour
     [SerializeField][Range(0, 100)] int dropChance;
     [SerializeField] List<GameObject> lootDrops;
 
-    void OnDestroy()
+    public void LootDrop()
     {
         int randomChance = Random.Range(0, 101);
 
