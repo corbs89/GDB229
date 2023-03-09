@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateDoor : MonoBehaviour
 {
     public float timer;
-    public bool isOpening;
+    public bool isOpen;
 
 
     private void OnTriggerEnter(Collider other)
@@ -13,16 +13,14 @@ public class RotateDoor : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            isOpening = true;
-            transform.Rotate(0, 90, 0);
-            timer += Time.deltaTime;
-            if (timer > 10)
-            {
-                isOpening = false;
-                transform.Rotate(0, -90, 0);
-                timer = 0;
-            }
+            openDoor();
         }
+    }
+
+
+    void openDoor()
+    {
+        transform.Rotate(0, 270, 0, Space.Self);
     }
 
 
