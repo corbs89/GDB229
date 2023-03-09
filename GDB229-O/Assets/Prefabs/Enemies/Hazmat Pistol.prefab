@@ -589,8 +589,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 601114956365275004}
-  - component: {fileID: 651811382357557316}
   - component: {fileID: 4271547471948610187}
+  - component: {fileID: 651811382357557316}
   - component: {fileID: 5004506380556188796}
   - component: {fileID: 1991329609754380045}
   m_Layer: 0
@@ -634,6 +634,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4271547471948610187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602426190079193540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3037cc6a9e5e247856e788ad49f02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 698560554388470212}
+  agent: {fileID: 5004506380556188796}
+  isTarget: 0
+  HP: 200
+  playerFaceSpeed: 5
+  attackSpeed: 0
+  attackRange: 0
+  projectile: {fileID: 5638097807591862358, guid: dd181cf163ab3494699b0bccbc28fcda, type: 3}
+  projectileSpeed: 0
+  shootPos: {fileID: 5207037277872943232}
 --- !u!95 &651811382357557316
 Animator:
   serializedVersion: 5
@@ -654,28 +676,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &4271547471948610187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602426190079193540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3037cc6a9e5e247856e788ad49f02f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 698560554388470212}
-  agent: {fileID: 5004506380556188796}
-  isTarget: 0
-  HP: 200
-  playerFaceSpeed: 5
-  attackSpeed: 0
-  attackRange: 0
-  projectile: {fileID: 0}
-  projectileSpeed: 0
-  shootPos: {fileID: 0}
 --- !u!195 &5004506380556188796
 NavMeshAgent:
   m_ObjectHideFlags: 0
