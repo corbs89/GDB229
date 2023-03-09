@@ -46,7 +46,7 @@ public class TargetSpawn : MonoBehaviour
     {
         if (activeTarget != null)
         {
-            Debug.Log("Object dead");
+            
             activeTarget.SetActive(false);
             activeTarget = null;
             Spawn();
@@ -55,7 +55,7 @@ public class TargetSpawn : MonoBehaviour
 
     void ObjSpawn()
     {
-        Debug.Log("Object alive again");
+        
         activeTarget = ObjectToSpawn;
         activeTarget.SetActive(true);
 

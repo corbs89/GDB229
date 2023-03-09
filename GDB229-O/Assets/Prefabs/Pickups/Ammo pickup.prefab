@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4934364672551600917}
   - component: {fileID: 2280927322595333743}
   m_Layer: 0
-  m_Name: Ammo Crate
+  m_Name: Ammo pickup
   m_TagString: Ammo
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

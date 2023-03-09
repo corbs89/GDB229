@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    
 
     [Header("-----Player Stuff-----")]
     public GameObject player;
@@ -48,16 +49,18 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
-        
+
+
     }
 
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "Armory") StartCoroutine(StartNextRound());
         reloadMeter.fillAmount = 0f;
+
+        
 
         if (playerController.equippedWeapon != null)
         {
@@ -66,7 +69,9 @@ public class GameManager : MonoBehaviour
         }
 
         playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+        Debug.Log(playerController);
         playerController.SpawnPlayer();
+        //SpawnManager.instance.TriggerSpawn();
     }
 
     void Update()
@@ -141,7 +146,8 @@ public class GameManager : MonoBehaviour
     IEnumerator StartNextRound()
     {
         currentRound++;
-
+        enemiesSpawned = 0;
+        
         roundStartText.SetActive(true);
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
 
@@ -149,7 +155,7 @@ public class GameManager : MonoBehaviour
         enemiesRemaining = enemiesMax;
 
         yield return new WaitForSeconds(roundTimer);
-
+        SpawnManager.instance.TriggerSpawn();
         roundStartText.SetActive(false);
     }
 

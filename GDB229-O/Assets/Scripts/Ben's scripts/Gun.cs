@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
         {
             if (!isShooting && Input.GetButton("Shoot") && CurrentMagCount > 0)
             {
-                Debug.Log("isShooting!");
+                
                 StartCoroutine(Shoot());
             }
             else if (CurrentMagCount <= 0 && Input.GetButton("Shoot"))
@@ -70,17 +70,17 @@ public class Gun : MonoBehaviour
         yield return new WaitForSecondsRealtime(reloadSpeed);
 
         int bulletsShot = data.magSize - CurrentMagCount;
-        Debug.Log("Bullets shot: " + bulletsShot);
+        
         if (CurrentReserveCount <= 0)
         {
-            Debug.Log("Reserves Empty");
+            
             StartCoroutine(GameManager.instance.FlashReservewarning());
         }
         else if (CurrentReserveCount < bulletsShot)
         {
             CurrentMagCount += CurrentReserveCount;
             CurrentReserveCount = 0;
-            Debug.Log(CurrentMagCount);
+            
         }
         else
         {
@@ -88,7 +88,7 @@ public class Gun : MonoBehaviour
             CurrentReserveCount -= bulletsShot;
         }
 
-        Debug.Log("Reserve Count: " + CurrentReserveCount);
+        
         UpdateUI();
         canShoot = true;
     }
@@ -101,14 +101,14 @@ public class Gun : MonoBehaviour
         CurrentMagCount--;
         GameManager.instance.UpdateMagazine(CurrentMagCount);
         RaycastHit hit;
-        Debug.Log("currentMag: " + CurrentMagCount);
+        
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, data.range))
         {
 
 
             if (hit.collider.GetComponent<IDamage>() != null)
             {
-                Debug.Log("hit");
+                
                 hit.collider.GetComponent<IDamage>().TakeDamage(data.damage);
             }
         }

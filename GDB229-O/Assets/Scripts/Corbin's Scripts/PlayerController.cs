@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
     {
         originalHP = HP;
         staminaMax = stamina;
-        UpdateHPUI();
-        SpawnPlayer();
+        //UpdateHPUI();
+        //SpawnPlayer();
         state = movementState.normal;
     }
 
@@ -315,6 +315,10 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateHPUI()
     {
+        Debug.Log(HP);
+        Debug.Log(GameManager.instance.hpFill);
+        Debug.Log(GameManager.instance.playerController);
+        Debug.Log(originalHP);
         GameManager.instance.hpFill.fillAmount = (float)HP / originalHP;
     }
 
