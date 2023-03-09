@@ -34,6 +34,11 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("Armory");
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("Armory");
+    }
+
     public void PlayerRespawn()
     {
         Resume();
