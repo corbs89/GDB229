@@ -130,6 +130,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 499632778}
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[1]
+      value: 
+      objectReference: {fileID: 318003319}
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[2]
+      value: 
+      objectReference: {fileID: 980180988}
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[3]
+      value: 
+      objectReference: {fileID: 1627206682}
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[4]
+      value: 
+      objectReference: {fileID: 1018415093}
+    - target: {fileID: 1382446124, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
+      propertyPath: spawners.Array.data[5]
+      value: 
+      objectReference: {fileID: 361803235}
     - target: {fileID: 2098257377566597398, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
       propertyPath: m_Name
       value: UI
@@ -917,68 +941,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1382446122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1382446123}
-  - component: {fileID: 1382446124}
-  m_Layer: 5
-  m_Name: SpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1382446123
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382446122}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1929679169}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1382446124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382446122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34504adf128c7745aafd816bed953c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawners:
-  - {fileID: 499632778}
-  - {fileID: 318003319}
-  - {fileID: 980180988}
-  - {fileID: 1627206682}
-  - {fileID: 1018415093}
-  - {fileID: 361803235}
-  spawnObjects:
-  - {fileID: 5495666689190255028, guid: a51a83122b6c5fe4c96460e61a358655, type: 3}
-  - {fileID: 6327389692177103696, guid: 78efb04fff7e6334c91ee4c6d9c8e78e, type: 3}
-  spawnDelayMin: 3
-  spawnDelayMax: 5
-  spawnRateChangeOnRound: 0.15
 --- !u!1 &1627206682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,11 +1038,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &1929679169 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2098257377566597402, guid: 05d5bef648784a543962dfd6ab983d11, type: 3}
-  m_PrefabInstance: {fileID: 303718466}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2007688351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1088,6 +1045,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1667744321117459366, guid: 8702afacf4bef7e449f26264280c8708, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.362
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667744321117459366, guid: 8702afacf4bef7e449f26264280c8708, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667744321117459366, guid: 8702afacf4bef7e449f26264280c8708, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.686
+      objectReference: {fileID: 0}
     - target: {fileID: 8679029437562610395, guid: 8702afacf4bef7e449f26264280c8708, type: 3}
       propertyPath: m_Name
       value: Player

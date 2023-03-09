@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291233709294365768}
   - component: {fileID: 1291233709294365767}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AR Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4851786696466165474}
   - component: {fileID: 6889515302158343865}
   - component: {fileID: 1291233709316864030}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
