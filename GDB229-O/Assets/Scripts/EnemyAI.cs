@@ -30,19 +30,19 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        setEnemyMovement();
+        SetEnemyMovement();
     }
 
-    void setEnemyMovement()
+    void SetEnemyMovement()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance)
         {
-            facePlayer();
+            FacePlayer();
         }
     }
 
-    void facePlayer()
+    void FacePlayer()
     {
         playerDirection.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
