@@ -3408,8 +3408,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6330250127402010594}
-  - component: {fileID: 6241172101234132962}
   - component: {fileID: 4920832192333884718}
+  - component: {fileID: 6241172101234132962}
   - component: {fileID: 5542017460247443645}
   - component: {fileID: 7876813800932685220}
   m_Layer: 6
@@ -3453,26 +3453,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6241172101234132962
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6327389692177103696}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 8cd667791d7dfe04e8179992b4f37177, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &4920832192333884718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,6 +3475,26 @@ MonoBehaviour:
   projectile: {fileID: 0}
   projectileSpeed: 0
   shootPos: {fileID: 7743327686090063101}
+--- !u!95 &6241172101234132962
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327389692177103696}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 8cd667791d7dfe04e8179992b4f37177, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!195 &5542017460247443645
 NavMeshAgent:
   m_ObjectHideFlags: 0
