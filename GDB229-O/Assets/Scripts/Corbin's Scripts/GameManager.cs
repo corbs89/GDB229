@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
-        playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+        
     }
 
     void Start()
@@ -63,7 +63,8 @@ public class GameManager : MonoBehaviour
             playerController.equippedWeapon.refillAmmo();
         }
 
-        playerController.Reset();
+        playerSpawnPosition = GameObject.FindGameObjectWithTag("Player Spawn Position");
+        playerController.SpawnPlayer();
     }
 
     void Update()
