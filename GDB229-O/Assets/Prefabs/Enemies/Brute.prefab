@@ -1052,7 +1052,7 @@ Transform:
   m_GameObject: {fileID: 4134691229102136967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -23.99949, y: -0.00000023841858, z: -8.110836}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7379838932303002858}
@@ -1100,6 +1100,7 @@ MonoBehaviour:
   headPos: {fileID: 4137431889261868469}
   isTarget: 0
   HP: 400
+  pointValue: 250
   playerFaceSpeed: 5
   attackSpeed: 1
   attackRange: 2
