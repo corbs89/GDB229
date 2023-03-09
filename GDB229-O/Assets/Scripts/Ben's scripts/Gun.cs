@@ -58,8 +58,23 @@ public class Gun : MonoBehaviour
             {
                 StartCoroutine(Reload());
             }
+            if(Input.GetButtonDown("Interact"))
+            {
+                CallInteract();
+            }
         }
 
+    }
+    void CallInteract()
+    {
+        Debug.Log("output Called");
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, data.range))
+        {
+            Debug.Log("Raycast hit");
+            hit.collider.GetComponent<Iinteract>()?.Interact();
+        }
     }
     IEnumerator Reload()
     {

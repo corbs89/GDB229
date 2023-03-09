@@ -219,7 +219,11 @@ public class GameManager : MonoBehaviour
         screenFlash.SetActive(true);
         yield return new WaitForSeconds(screenFlashTimer);
         yield return new WaitForSeconds(flashTimer);
-        screenFlash.SetActive(false);
+        if(screenFlash != null)
+        {
+            screenFlash.SetActive(false);
+        }
+       
     }
 
 
