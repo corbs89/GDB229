@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         IncrementStamina();
         SwapWeapons();
         StartCoroutine(CheckForLowHealth());
+        ProcessWeaponDrop();
 
         timeSinceUsedStamina += Time.deltaTime;
     }
@@ -180,11 +181,57 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Time.deltaTime * playerVelocity);
     }
 
+    void ProcessWeaponDrop()
+    {
+        if (equippedWeapon != null && canSwitchWeapon && Input.GetKeyDown(KeyCode.G))
+        {
+            // create weapon item drop instance
+
+            if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
+            {
+
+                LoadoutManager.instance.ClearSlot1();
+                if (LoadoutManager.instance.weaponSlot2 != null)
+                {
+                    LoadoutManager.instance.slot2Renderer.enabled = true;
+                    equippedWeapon = LoadoutManager.instance.weaponSlot2;
+                    equippedWeapon.enabled = true;
+                    LoadoutManager.instance.slot = LoadoutManager.Slot.two;
+                }
+                else
+                {
+                    ClearEquippedWeapon();
+                }
+            }
+            else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
+            {
+                LoadoutManager.instance.ClearSlot2();
+                if (LoadoutManager.instance.weaponSlot1 != null)
+                {
+                    LoadoutManager.instance.slot1Renderer.enabled = true;
+                    equippedWeapon = LoadoutManager.instance.weaponSlot1;
+                    equippedWeapon.enabled = true;
+                    LoadoutManager.instance.slot = LoadoutManager.Slot.one;
+                }
+                else
+                {
+                    ClearEquippedWeapon();
+                }
+            }
+        }
+    }
+
+    public void ClearEquippedWeapon()
+    {
+        equippedWeapon = null;
+        GameManager.instance.UpdateMagazine(0);
+        GameManager.instance.UpdateReserve(0);
+        LoadoutManager.instance.slot = LoadoutManager.Slot.none;
+    }
+
     void SwapWeapons()
     {
-        if (equippedWeapon == null) return;
-
-        if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
+        if (equippedWeapon != null && Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
         {
             equippedWeapon.enabled = false;
 
@@ -193,12 +240,14 @@ public class PlayerController : MonoBehaviour
                 LoadoutManager.instance.slot1Renderer.enabled = false;
                 LoadoutManager.instance.slot2Renderer.enabled = true;
                 equippedWeapon = LoadoutManager.instance.weaponSlot2;
+                LoadoutManager.instance.slot = LoadoutManager.Slot.two;
             }
             else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
             {
                 LoadoutManager.instance.slot1Renderer.enabled = true;
                 LoadoutManager.instance.slot2Renderer.enabled = false;
                 equippedWeapon = LoadoutManager.instance.weaponSlot1;
+                LoadoutManager.instance.slot = LoadoutManager.Slot.one;
             }
 
             equippedWeapon.enabled = true;
