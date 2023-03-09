@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5210795396716984757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3333328, z: 0.17100005}
+  m_LocalPosition: {x: 0, y: 1.3333328, z: 0.342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1225,6 +1225,7 @@ GameObject:
   - component: {fileID: 5553793961045567540}
   - component: {fileID: 350838309554722599}
   - component: {fileID: 3398044392852122109}
+  - component: {fileID: 2887405145504231796}
   m_Layer: 6
   m_Name: Hazmat Pistol
   m_TagString: Enemy
@@ -1284,7 +1285,7 @@ MonoBehaviour:
   isTarget: 0
   HP: 200
   playerFaceSpeed: 5
-  attackSpeed: 2
+  attackSpeed: 1
   attackRange: 12
   projectile: {fileID: 5890752561481884833, guid: dd181cf163ab3494699b0bccbc28fcda, type: 3}
   projectileSpeed: 22
@@ -1345,6 +1346,19 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!135 &2887405145504231796
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5495666689190255028}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5495688021878139834
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,12 +24,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408665838036494225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3333333, z: 0.17}
+  m_LocalPosition: {x: 0, y: 1.3333333, z: 0.297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6330250127402010594}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410692744934240700
 GameObject:
@@ -2075,7 +2075,7 @@ Transform:
   m_Children:
   - {fileID: 6324848282084632984}
   m_Father: {fileID: 6330250127402010594}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6326872683273648382
 GameObject:
@@ -3412,6 +3412,7 @@ GameObject:
   - component: {fileID: 6241172101234132962}
   - component: {fileID: 5542017460247443645}
   - component: {fileID: 7876813800932685220}
+  - component: {fileID: 2518928870008483215}
   m_Layer: 6
   m_Name: Hazmat AR
   m_TagString: Enemy
@@ -3431,8 +3432,8 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6329823488901714368}
   - {fileID: 7743327686090063101}
+  - {fileID: 6329823488901714368}
   - {fileID: 6324985303190091060}
   - {fileID: 6330293161307628858}
   - {fileID: 6325293556880935712}
@@ -3532,6 +3533,19 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!135 &2518928870008483215
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327389692177103696}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 16
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6327394393251329392
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,18 +22,38 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     Vector3 playerDirection;
     bool isShooting;
+    bool playerInRange;
 
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
     void Update()
     {
         SetEnemyMovement();
-        StartCoroutine(shoot());
+        if (playerInRange && !isShooting)
+        {
+            StartCoroutine(shoot());
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 
     void SetEnemyMovement()
@@ -60,8 +80,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0 && isTarget == false)
         {
-            StartCoroutine(FlashMat());
-            StartCoroutine(DestroyObject());
+            GameManager.instance.UpdateGameGoal(-1);
+            Destroy(gameObject);
         }
     }
 
@@ -71,12 +91,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
 
-    }
-
-    IEnumerator DestroyObject()
-    {
-        yield return new WaitForSeconds(0.3f);
-        Destroy(gameObject);
     }
 
     IEnumerator shoot()
