@@ -3467,13 +3467,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6206242200441938888}
   agent: {fileID: 5542017460247443645}
+  headPos: {fileID: 7142955833456089259}
   isTarget: 0
   HP: 200
   playerFaceSpeed: 5
-  attackSpeed: 0
-  attackRange: 0
+  attackSpeed: 0.8
+  attackRange: 15
   projectile: {fileID: 8319851011066866333, guid: 69a9d26fc8feea04bb7184592c216fff, type: 3}
-  projectileSpeed: 0
+  projectileSpeed: 30
   shootPos: {fileID: 7743327686090063101}
 --- !u!95 &6241172101234132962
 Animator:

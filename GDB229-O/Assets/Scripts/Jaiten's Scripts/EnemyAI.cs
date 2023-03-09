@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform headPos;
     [SerializeField] bool isTarget;
 
     [Header("----- Enemy Stats -----")]
@@ -20,6 +21,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
 
     Vector3 playerDirection;
+    bool isShooting;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Update()
     {
         SetEnemyMovement();
+        StartCoroutine(shoot());
     }
 
     void SetEnemyMovement()
@@ -44,6 +47,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void FacePlayer()
     {
+        playerDirection = (GameManager.instance.player.transform.position - headPos.position);
         playerDirection.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
@@ -68,9 +72,19 @@ public class EnemyAI : MonoBehaviour, IDamage
         model.material.color = Color.white;
 
     }
+
     IEnumerator DestroyObject()
     {
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
+    }
+
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        GameObject bulletClone = Instantiate(projectile, shootPos.position, projectile.transform.rotation);
+        bulletClone.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+        yield return new WaitForSeconds(attackSpeed);
+        isShooting = false;
     }
 }
