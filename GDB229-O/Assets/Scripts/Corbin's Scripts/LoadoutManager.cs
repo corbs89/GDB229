@@ -67,4 +67,24 @@ public class LoadoutManager : MonoBehaviour
         GameManager.instance.playerController.equippedWeapon = weaponSlot2;
         GameManager.instance.playerController.equippedWeapon.enabled = true;
     }
+
+    public void ClearSlot1()
+    {
+        weaponSlot1.enabled = false;
+        slot1Renderer.enabled = false;
+
+        weaponSlot1Object = null;
+        weaponSlot1 = null;
+        slot1Renderer = null;
+    }
+
+    public void ClearSlot2()
+    {
+        weaponSlot2.enabled = false;
+        slot2Renderer.enabled = false;
+
+        weaponSlot2Object = null;
+        weaponSlot2 = null;
+        slot2Renderer = null;
+    }
 }
