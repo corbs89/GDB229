@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(StartNextRound());
+        if (SceneManager.GetActiveScene().name != "Armory") StartCoroutine(StartNextRound());
         reloadMeter.fillAmount = 0f;
 
         if (playerController.equippedWeapon != null)
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
 
         enemiesMax = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
+        enemiesRemaining = enemiesMax;
 
         yield return new WaitForSeconds(roundTimer);
 
