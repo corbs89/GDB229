@@ -767,6 +767,7 @@ MonoBehaviour:
   winMenu: {fileID: 251628907817491929}
   loseMenu: {fileID: 8840575968078068321}
   screenFlash: {fileID: 5863484324659920321}
+  screenFlashTimer: 0.5
   enemiesRemaining: 0
   enemiesSpawned: 0
   enemiesMax: 0
