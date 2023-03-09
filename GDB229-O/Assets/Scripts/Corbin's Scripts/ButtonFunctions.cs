@@ -33,12 +33,7 @@ public class ButtonFunctions : MonoBehaviour
         Resume();
         GameManager.instance.playerController.SpawnPlayer();
     }
-
-    public void ReduceHP()
-    {
-        Resume();
-        GameManager.instance.playerController.TakeDamage(5);
-    }
+    
     public static void LoadLevel(int sceneNumber)
     {
         Debug.Log("Loading scene");

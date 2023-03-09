@@ -31,9 +31,12 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public GameObject screenFlash;
 
     [Header("-----Game Goals-----")]
     public int enemiesRemaining;
+    public int enemiesSpawned;
+    public int enemiesMax;
     [Range(1f, 2f)] public float enemiesCoefficient = 1.5f;
     public int numberOfRounds; // 0 for infinite
     public int currentRound;
@@ -94,6 +97,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool CanSpawnEnemy()
+    {
+        if (enemiesSpawned < enemiesMax)
+        {
+            enemiesSpawned++;
+            return true;
+        }
+
+        return false;
+    }
+
     public void UpdateGameGoal(int value)
     {
         enemiesRemaining += value;
@@ -119,7 +133,7 @@ public class GameManager : MonoBehaviour
         roundStartText.SetActive(true);
         roundStartText.GetComponent<TextMeshProUGUI>().text = "ROUND " + currentRound.ToString();
 
-        enemiesRemaining = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
+        enemiesMax = currentRound + (int)Mathf.Pow(enemiesCoefficient, currentRound + 1);
 
         yield return new WaitForSeconds(roundTimer);
 
@@ -177,5 +191,13 @@ public class GameManager : MonoBehaviour
 
         reloadMeter.fillAmount = 0f;
         playerController.ToggleCanSwitchWeapon(true);
+    }
+
+    public IEnumerator playerHit(float flashTimer, float shakeTimer)
+    {
+        CameraControls.instance.CameraShake(50, shakeTimer);
+        screenFlash.SetActive(true);
+        yield return new WaitForSeconds(flashTimer);
+        screenFlash.SetActive(false);
     }
 }

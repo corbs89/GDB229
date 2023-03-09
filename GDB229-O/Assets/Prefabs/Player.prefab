@@ -211,6 +211,9 @@ MonoBehaviour:
   jumpSpeed: 18
   gravity: 25
   weightModifier: 0
+  PistolPickupPrefab: {fileID: 5109644227994855362, guid: 6af06e3050c57b64e98b3e414997a279, type: 3}
+  ARPickupPrefab: {fileID: 5109644227994855362, guid: 4aae1af4817ce6e43bab06c10fb338fc, type: 3}
+  SniperPickupPrefab: {fileID: 8648292700347133654, guid: 30e554b07261a824da59b687e7f09d1b, type: 3}
   canSwitchWeapon: 1
   equippedWeapon: {fileID: 0}
 --- !u!114 &3028674936742989713
@@ -225,12 +228,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27e23a02905ee34ca8605dfb8d3e08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSlot1Object: {fileID: 517658002845409775, guid: 44afdb01e6222b04f96a209f7632380e, type: 3}
-  weaponSlot2Object: {fileID: 1291233709294365769, guid: 60a66f568685f8c4c989a94df5c5ea5f, type: 3}
+  weaponSlot1Object: {fileID: 0}
+  weaponSlot2Object: {fileID: 0}
   weaponSlot1: {fileID: 0}
   weaponSlot2: {fileID: 0}
   slot1Renderer: {fileID: 0}
   slot2Renderer: {fileID: 0}
+  slot: 0
 --- !u!136 &8679029437562610393
 CapsuleCollider:
   m_ObjectHideFlags: 0
