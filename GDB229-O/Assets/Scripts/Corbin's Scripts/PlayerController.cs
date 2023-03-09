@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -36,6 +37,16 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     int points;
     public bool canSwitchWeapon = true;
+    movementState state;
+
+    enum movementState
+    {
+        normal,
+        sprinting,
+        exhausted,
+        jumping,
+        jumpsprint
+    }
     
     public Gun equippedWeapon;
 
@@ -52,12 +63,14 @@ public class PlayerController : MonoBehaviour
         staminaMax = stamina;
         UpdateHPUI();
         SpawnPlayer();
+        state = movementState.normal;
     }
 
 
     void Update()
     {
         ResetJump();
+        ProcessSprint();
         ProcessMovement();
         ProcessJump();
         IncrementStamina();
@@ -72,6 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpsCurrent = 0;
             playerVelocity.y = 0;
+            state = movementState.normal;
         }
     }
 
@@ -88,18 +102,31 @@ public class PlayerController : MonoBehaviour
         }
         else currentSpeed = playerSpeed;
 
-        if (IsSprinting() && stamina != 0 && movement != Vector3.zero)
+        if (state == movementState.sprinting && stamina != 0 && movement != Vector3.zero)
         {
             currentSpeed *= sprintCoefficient;
             DecrementStamina();
+        }
+        else if (state == movementState.jumpsprint)
+        {
+            currentSpeed *= sprintCoefficient;
         }
 
         characterController.Move(currentSpeed * Time.deltaTime * movement);
     }
 
-    bool IsSprinting()
+    void ProcessSprint()
     {
-        return Input.GetKey(KeyCode.LeftShift);
+        if (state == movementState.exhausted || state == movementState.jumping || state == movementState.jumpsprint) return;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            state = movementState.sprinting;
+        }
+        else
+        {
+            state = movementState.normal;
+        }
     }
 
     void IncrementStamina()
@@ -110,7 +137,12 @@ public class PlayerController : MonoBehaviour
 
             stamina = Mathf.Clamp(stamina, 0f, staminaMax);
 
-            if (stamina == staminaMax) ToggleStaminaPie(false);
+            if (stamina == staminaMax)
+            {
+                ToggleStaminaPie(false);
+                state = movementState.normal;
+                GameManager.instance.staminaFill.color = new Color(255, 255, 255, 150);
+            }
         }
 
         UpdateStaminaUI();
@@ -123,6 +155,12 @@ public class PlayerController : MonoBehaviour
         stamina -= sprintCost * Time.deltaTime;
         stamina = Mathf.Clamp(stamina, 0f, staminaMax);
         UpdateStaminaUI();
+
+        if (stamina <= Mathf.Epsilon)
+        {
+            state = movementState.exhausted;
+            GameManager.instance.staminaFill.color = new Color(255, 0, 0, 150);
+        }
     }
 
     void ProcessJump()
@@ -131,6 +169,8 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = jumpSpeed;
             jumpsCurrent++;
+            if (state == movementState.sprinting) state = movementState.jumpsprint;
+            else state = movementState.jumping;
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
