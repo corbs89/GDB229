@@ -37,7 +37,7 @@ public class ButtonFunctions : MonoBehaviour
     public void ReduceHP()
     {
         Resume();
-        GameManager.instance.playerController.TakeDamage(5);
+        GameManager.instance.playerController.TakeDamage(8);
     }
     public static void LoadLevel(int sceneNumber)
     {

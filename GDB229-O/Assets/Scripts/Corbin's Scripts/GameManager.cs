@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public GameObject screenFlash;
 
     [Header("-----Game Goals-----")]
     public int enemiesRemaining;
@@ -177,5 +178,13 @@ public class GameManager : MonoBehaviour
 
         reloadMeter.fillAmount = 0f;
         playerController.ToggleCanSwitchWeapon(true);
+    }
+
+    public IEnumerator playerHit(float flashTimer, float shakeTimer)
+    {
+        CameraControls.instance.CameraShake(50, shakeTimer);
+        screenFlash.SetActive(true);
+        yield return new WaitForSeconds(flashTimer);
+        screenFlash.SetActive(false);
     }
 }

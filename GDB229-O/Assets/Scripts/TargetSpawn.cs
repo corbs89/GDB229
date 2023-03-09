@@ -12,23 +12,23 @@ public class TargetSpawn : MonoBehaviour
 
     //public GameObject activeTarget;
     //public TargetSpawn spawner;
-    
+
     // Start is called before the first frame update
 
-   
+
     void Start()
     {
         activeTarget = ObjectToSpawn;
         activeTarget.SetActive(true);
-        
+
     }
 
     // Update is called once per frame
-    
+
     bool CheckActive()
     {
         bool isActive = false;
-        if (activeTarget != null) 
+        if (activeTarget != null)
         {
             isActive = true;
         }
@@ -36,30 +36,29 @@ public class TargetSpawn : MonoBehaviour
     }
     void Spawn()
     {
-        if(!CheckActive())
+        if (!CheckActive())
         {
             Invoke("ObjSpawn", 3.0f);
         }
     }
-    
+
     public void DestroyTarget()
     {
-        if (activeTarget != null) 
+        if (activeTarget != null)
         {
             Debug.Log("Object dead");
             activeTarget.SetActive(false);
             activeTarget = null;
             Spawn();
         }
-        
     }
-    
+
     void ObjSpawn()
-    { 
+    {
         Debug.Log("Object alive again");
         activeTarget = ObjectToSpawn;
         activeTarget.SetActive(true);
-        
+
     }
-    
+
 }

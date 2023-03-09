@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPickup : Gun
+public class AmmoPickup : MonoBehaviour
 {
-    [SerializeField] int amount = 25;
+    ///[SerializeField] int amount = 10;
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !other.CompareTag("Enemy"))
         {
-            GrabAmmo();
+            GameManager.instance.playerController.equippedWeapon.refillAmmo();
         }
         Destroy(gameObject);
     }
-    void GrabAmmo()
-    {
 
-        AddAmmo(amount);
-        UpdateUI();
 
-    }
+
+
+
+
 }
