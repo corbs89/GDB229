@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
                     LoadoutManager.instance.slot2Renderer.enabled = true;
                     equippedWeapon = LoadoutManager.instance.weaponSlot2;
                     equippedWeapon.enabled = true;
+                    LoadoutManager.instance.slot = LoadoutManager.Slot.two;
                 }
                 else
                 {
@@ -210,6 +211,7 @@ public class PlayerController : MonoBehaviour
                     LoadoutManager.instance.slot1Renderer.enabled = true;
                     equippedWeapon = LoadoutManager.instance.weaponSlot1;
                     equippedWeapon.enabled = true;
+                    LoadoutManager.instance.slot = LoadoutManager.Slot.one;
                 }
                 else
                 {
@@ -219,11 +221,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ClearEquippedWeapon()
+    public void ClearEquippedWeapon()
     {
         equippedWeapon = null;
         GameManager.instance.UpdateMagazine(0);
         GameManager.instance.UpdateReserve(0);
+        LoadoutManager.instance.slot = LoadoutManager.Slot.none;
     }
 
     void SwapWeapons()
@@ -237,12 +240,14 @@ public class PlayerController : MonoBehaviour
                 LoadoutManager.instance.slot1Renderer.enabled = false;
                 LoadoutManager.instance.slot2Renderer.enabled = true;
                 equippedWeapon = LoadoutManager.instance.weaponSlot2;
+                LoadoutManager.instance.slot = LoadoutManager.Slot.two;
             }
             else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
             {
                 LoadoutManager.instance.slot1Renderer.enabled = true;
                 LoadoutManager.instance.slot2Renderer.enabled = false;
                 equippedWeapon = LoadoutManager.instance.weaponSlot1;
+                LoadoutManager.instance.slot = LoadoutManager.Slot.one;
             }
 
             equippedWeapon.enabled = true;

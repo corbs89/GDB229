@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LoadoutManager : MonoBehaviour
@@ -17,6 +18,15 @@ public class LoadoutManager : MonoBehaviour
     public Renderer slot1Renderer;
     public Renderer slot2Renderer;
 
+    public Slot slot;
+
+    public enum Slot
+    {
+        none,
+        one,
+        two
+    }
+
     private void Awake()
     {
         instance = this; 
@@ -25,16 +35,13 @@ public class LoadoutManager : MonoBehaviour
     private void Start()
     {
         gunPosition = GameManager.instance.playerController.GetGunPosition();
-
-        EquipWeaponInSlot2(weaponSlot2Object);
-        EquipWeaponInSlot1(weaponSlot1Object);
-
-        weaponSlot2.enabled = false;
-        slot2Renderer.enabled = false;
+        GameManager.instance.playerController.ClearEquippedWeapon();
     }
 
     public void EquipWeaponInSlot1(GameObject newWeapon)
     {
+        if (weaponSlot2 != null) ToggleSlot2(false);
+
         weaponSlot1Object = newWeapon;
 
         weaponSlot1 = Instantiate(weaponSlot1Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
@@ -47,12 +54,15 @@ public class LoadoutManager : MonoBehaviour
         weaponSlot1.transform.name = weaponSlot1.transform.name.Replace(stringToReplace, "");
 
         GameManager.instance.playerController.equippedWeapon = weaponSlot1;
-
         GameManager.instance.playerController.equippedWeapon.enabled = true;
+
+        slot = Slot.one;
     }
 
     public void EquipWeaponInSlot2(GameObject newWeapon)
     {
+        if (weaponSlot1 != null) ToggleSlot1(false);
+
         weaponSlot2Object = newWeapon;
 
         weaponSlot2 = Instantiate(weaponSlot2Object.transform.GetComponentInChildren<Gun>(), gunPosition.transform);
@@ -66,12 +76,25 @@ public class LoadoutManager : MonoBehaviour
 
         GameManager.instance.playerController.equippedWeapon = weaponSlot2;
         GameManager.instance.playerController.equippedWeapon.enabled = true;
+
+        slot = Slot.two;
+    }
+
+    public void ToggleSlot1(bool value)
+    {
+        weaponSlot1.enabled = value;
+        slot1Renderer.enabled = value;
+    }
+
+    public void ToggleSlot2(bool value)
+    {
+        weaponSlot2.enabled = value;
+        slot2Renderer.enabled = value;
     }
 
     public void ClearSlot1()
     {
-        weaponSlot1.enabled = false;
-        slot1Renderer.enabled = false;
+        ToggleSlot1(false);
 
         weaponSlot1Object = null;
         weaponSlot1 = null;
@@ -80,8 +103,7 @@ public class LoadoutManager : MonoBehaviour
 
     public void ClearSlot2()
     {
-        weaponSlot2.enabled = false;
-        slot2Renderer.enabled = false;
+        ToggleSlot2(false);
 
         weaponSlot2Object = null;
         weaponSlot2 = null;
