@@ -113,8 +113,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 684315702694230731}
   agent: {fileID: 0}
+  headPos: {fileID: 0}
   isTarget: 1
+  dmgTextPos: {fileID: 0}
+  dmgTextMesh: {fileID: 0}
   HP: 0
+  playerFaceSpeed: 0
   attackSpeed: 0
   attackRange: 0
   projectile: {fileID: 0}
