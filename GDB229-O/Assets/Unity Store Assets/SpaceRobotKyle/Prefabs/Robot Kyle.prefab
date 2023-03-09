@@ -332,6 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2437060625171721727}
+  - component: {fileID: 4939734268146978613}
   - component: {fileID: 836566444049388108}
   - component: {fileID: 5087450698867807529}
   - component: {fileID: 5717370821310611589}
@@ -360,6 +361,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4939734268146978613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696014694992928748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebdf324b208dd147b509cf46550fac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropChance: 25
+  lootDrops:
+  - {fileID: 4263444811448103424, guid: f3db027de31b518448fc5634159bbc55, type: 3}
+  - {fileID: 7513513880091008636, guid: 7e87932b96b70684ea8464d9cddb6409, type: 3}
 --- !u!114 &836566444049388108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,8 +391,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 987508677773556871}
   agent: {fileID: 5087450698867807529}
+  headPos: {fileID: 0}
   isTarget: 0
   HP: 500
+  playerFaceSpeed: 0
   attackSpeed: 0
   attackRange: 0
   projectile: {fileID: 0}
