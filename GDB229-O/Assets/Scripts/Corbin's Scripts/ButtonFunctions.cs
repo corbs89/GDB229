@@ -13,7 +13,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Restart()
     {
-        GameManager.instance.UnpauseState();
+        Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -26,6 +26,12 @@ public class ButtonFunctions : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("This goes to the Main Menu.");
+    }
+
+    public void Armory()
+    {
+        Resume();
+        SceneManager.LoadScene("Armory");
     }
 
     public void PlayerRespawn()
