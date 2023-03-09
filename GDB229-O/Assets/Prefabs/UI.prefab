@@ -285,7 +285,6 @@ MonoBehaviour:
   winMenu: {fileID: 251628907817491929}
   loseMenu: {fileID: 8840575968078068321}
   screenFlash: {fileID: 5908225088274745631}
-  screenFlashTimer: 0.1
   enemiesRemaining: 0
   enemiesCoefficient: 1.205
   numberOfRounds: 10
@@ -1646,7 +1645,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take 5 Damage
+  m_text: Take 8 Damage
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1728,7 +1727,7 @@ GameObject:
   - component: {fileID: 1439584550339341464}
   - component: {fileID: 77287893138979324}
   m_Layer: 5
-  m_Name: Take 5 Damage
+  m_Name: Take 8 Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

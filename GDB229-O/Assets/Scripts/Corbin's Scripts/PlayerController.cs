@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     int points;
     public bool canSwitchWeapon = true;
     movementState state;
+    bool screenIsFlashing;
 
     enum movementState
     {
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         ProcessJump();
         IncrementStamina();
         SwapWeapons();
+        StartCoroutine(CheckForLowHealth());
 
         timeSinceUsedStamina += Time.deltaTime;
     }
@@ -219,7 +221,7 @@ public class PlayerController : MonoBehaviour
     {
         HP -= damage;
         UpdateHPUI();
-        StartCoroutine(GameManager.instance.playerHit());
+        StartCoroutine(GameManager.instance.playerHit(0.1f, 0.0675f));
 
         if (HP <= 0) GameManager.instance.PlayerDead();
     }
@@ -262,7 +264,30 @@ public class PlayerController : MonoBehaviour
         UpdateHPUI();
     }
 
+    IEnumerator CheckForLowHealth()
+    {
+        float percentHP = (float)HP / originalHP;
 
+        if (percentHP < .25f && !screenIsFlashing)
+        {
+            screenIsFlashing = true;
+
+            while (percentHP <= .25f)
+            {
+                StartCoroutine(GameManager.instance.playerHit(0.3f, 0f));
+
+                yield return new WaitForSeconds(5);
+
+                percentHP = (float)HP / originalHP;
+            }
+
+            screenIsFlashing = false;
+        }
+
+        
+
+
+    }
 
 
 
