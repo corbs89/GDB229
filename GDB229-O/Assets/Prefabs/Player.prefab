@@ -205,8 +205,8 @@ MonoBehaviour:
   sprintCost: 1
   staminaRechargeRate: 5
   staminaRechargeStartTime: 3
-  jumpTimes: 2
-  jumpSpeed: 18
+  jumpTimes: 1
+  jumpSpeed: 12
   gravity: 25
   weightModifier: 0
   PistolPickupPrefab: {fileID: 5109644227994855362, guid: 6af06e3050c57b64e98b3e414997a279, type: 3}
