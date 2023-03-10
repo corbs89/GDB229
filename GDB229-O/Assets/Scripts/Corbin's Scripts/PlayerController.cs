@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
     public void IncrementPoints(int value)
     {
         points += value;
-        GameManager.instance.pointsText.text = "Points: " + points.ToString("000000000");
+        GameManager.instance.pointsText.text = points.ToString("000000");
     }
 
     public void UpdateHPUI()
