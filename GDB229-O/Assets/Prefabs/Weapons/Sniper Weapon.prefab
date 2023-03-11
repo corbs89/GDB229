@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8025461618481731814}
   - component: {fileID: 5225545128301718572}
   - component: {fileID: 2536435417552557912}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6864972622705932399}
   - component: {fileID: 6864972622705932398}
   - component: {fileID: 6864972622705932385}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6864972623042046930}
   - component: {fileID: 6864972623042046935}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Sniper Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

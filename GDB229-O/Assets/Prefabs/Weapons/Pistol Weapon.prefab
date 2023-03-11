@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517658002845409773}
   - component: {fileID: 517658002845409772}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Pistol Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 2146583131844199131}
   - component: {fileID: 4192506787384768017}
   - component: {fileID: 517658002614956348}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
