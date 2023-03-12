@@ -13,16 +13,16 @@ public class Target : MonoBehaviour, IDamage
     [Header("----- Target Stats -----")]
     [SerializeField] int HP;
     int currentHP;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         currentHP = HP;
     }
-    
+
     // Update is called once per frame
-    
+
 
     public void TakeDamage(int damage)
     {
@@ -51,6 +51,6 @@ public class Target : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.3f);
         manager.DestroyTarget();
         currentHP = HP;
-        
+
     }
 }

@@ -6,15 +6,24 @@ public class dummyMovement : MonoBehaviour
 {
 
     public float speed;
-    private bool isMovingLeft;
-    private bool isMovingRight;
+    bool isMovingLeft;
+    bool isMovingRight;
 
-    private void Start()
+    void Start()
     {
         isMovingLeft = true;
         isMovingRight = false;
     }
-    private void Update()
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            dummyMove();
+        }
+    }
+    private void dummyMove()
     {
         if (isMovingLeft == true)
         {
@@ -36,12 +45,9 @@ public class dummyMovement : MonoBehaviour
             }
         }
     }
-
-
     private void Moveleft()
     {
         transform.Translate(-1 * speed * Time.deltaTime, 0, 0, Space.Self);
-
     }
     private void Moveright()
     {

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController characterController;
 
     [Header("-----Objects-----")]
-    [SerializeField] GameObject gunPosition;
+    /*[SerializeField] GameObject gunPosition;*/
 
     [Header("-----Player Stats-----")]
     [SerializeField] int HP;
@@ -25,10 +25,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(10, 75)] int gravity;
 
     [Header("-----Gun Stats-----")]
+    [SerializeField] List<weaponStats> weaponsList = new List<weaponStats>();
     [SerializeField][Range(0f, 10f)] float weightModifier;
-    [SerializeField] GameObject PistolPickupPrefab;
-    [SerializeField] GameObject ARPickupPrefab;
-    [SerializeField] GameObject SniperPickupPrefab;
+    [SerializeField] float shootRate;
+    [SerializeField] float shootDistance;
+    [SerializeField] float weapondamage;
+    [SerializeField] MeshFilter weaponModel;
+    [SerializeField] MeshRenderer weaponMaterial;
+    [SerializeField] AudioClip weaponSFX;
+
+    [Header("-----Camera Stats-----")]
+    public float maxZoom;
+    public float zoomInSpeed;
+    public float zoomOutSpeed;
+
+
+    /*
+        [SerializeField] GameObject PistolPickupPrefab;
+        [SerializeField] GameObject ARPickupPrefab;
+        [SerializeField] GameObject SniperPickupPrefab;*/
 
     int originalHP;
     float staminaMax;
@@ -40,6 +55,8 @@ public class PlayerController : MonoBehaviour
     public bool canSwitchWeapon = true;
     movementState state;
     bool screenIsFlashing;
+    float originalCameraZoom;
+    public int selectedWeapon;
 
     enum movementState
     {
@@ -49,15 +66,15 @@ public class PlayerController : MonoBehaviour
         jumping,
         jumpsprint
     }
-    
+
     public Gun equippedWeapon;
 
     public int GetHP() { return HP; }
     public float GetStamina() { return stamina; }
     public int GetPoints() { return points; }
-    public GameObject GetGunPosition() { return gunPosition; }
+    //public GameObject GetGunPosition() { return gunPosition; }
 
-    public Gun GetEquippedWeapon() {  return equippedWeapon; }
+    public Gun GetEquippedWeapon() { return equippedWeapon; }
 
     void Awake()
     {
@@ -76,9 +93,10 @@ public class PlayerController : MonoBehaviour
         ProcessMovement();
         ProcessJump();
         IncrementStamina();
-        SwapWeapons();
+        WeaponSelect();
+        // SwapWeapons();
         StartCoroutine(CheckForLowHealth());
-        ProcessWeaponDrop();
+        //ProcessWeaponDrop();
 
         timeSinceUsedStamina += Time.deltaTime;
     }
@@ -182,64 +200,64 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Time.deltaTime * playerVelocity);
     }
 
-    void ProcessWeaponDrop()
-    {
-        if (equippedWeapon != null && canSwitchWeapon && Input.GetKeyDown(KeyCode.G))
-        {
+    /*   void ProcessWeaponDrop()
+       {
+           if (equippedWeapon != null && canSwitchWeapon && Input.GetKeyDown(KeyCode.G))
+           {
 
-            switch (equippedWeapon.GetWeight())
-            {
-                case 0:
-                    SpawnWeaponPickup(PistolPickupPrefab);
-                    break;
+               switch (equippedWeapon.GetWeight())
+               {
+                   case 0:
+                       SpawnWeaponPickup(PistolPickupPrefab);
+                       break;
 
-                case 25:
-                    break;
+                   case 25:
+                       break;
 
-                case 50:
-                    SpawnWeaponPickup(ARPickupPrefab);
-                    break;
+                   case 50:
+                       SpawnWeaponPickup(ARPickupPrefab);
+                       break;
 
-                case 75:
-                    SpawnWeaponPickup(SniperPickupPrefab);
-                    break;
-            }
+                   case 75:
+                       SpawnWeaponPickup(SniperPickupPrefab);
+                       break;
+               }
 
-            if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
-            {
+               if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
+               {
 
-                LoadoutManager.instance.ClearSlot1();
-                if (LoadoutManager.instance.weaponSlot2 != null)
-                {
-                    LoadoutManager.instance.slot2Renderer.enabled = true;
-                    equippedWeapon = LoadoutManager.instance.weaponSlot2;
-                    equippedWeapon.enabled = true;
-                    equippedWeapon.UpdateUI();
-                    LoadoutManager.instance.slot = LoadoutManager.Slot.two;
-                }
-                else
-                {
-                    ClearEquippedWeapon();
-                }
-            }
-            else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
-            {
-                LoadoutManager.instance.ClearSlot2();
-                if (LoadoutManager.instance.weaponSlot1 != null)
-                {
-                    LoadoutManager.instance.slot1Renderer.enabled = true;
-                    equippedWeapon = LoadoutManager.instance.weaponSlot1;
-                    equippedWeapon.enabled = true;
-                    equippedWeapon.UpdateUI();
-                    LoadoutManager.instance.slot = LoadoutManager.Slot.one;
-                }
-                else
-                {
-                    ClearEquippedWeapon();
-                }
-            }
-        }
-    }
+                   LoadoutManager.instance.ClearSlot1();
+                   if (LoadoutManager.instance.weaponSlot2 != null)
+                   {
+                       LoadoutManager.instance.slot2Renderer.enabled = true;
+                       equippedWeapon = LoadoutManager.instance.weaponSlot2;
+                       equippedWeapon.enabled = true;
+                       equippedWeapon.UpdateUI();
+                       LoadoutManager.instance.slot = LoadoutManager.Slot.two;
+                   }
+                   else
+                   {
+                       ClearEquippedWeapon();
+                   }
+               }
+               else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
+               {
+                   LoadoutManager.instance.ClearSlot2();
+                   if (LoadoutManager.instance.weaponSlot1 != null)
+                   {
+                       LoadoutManager.instance.slot1Renderer.enabled = true;
+                       equippedWeapon = LoadoutManager.instance.weaponSlot1;
+                       equippedWeapon.enabled = true;
+                       equippedWeapon.UpdateUI();
+                       LoadoutManager.instance.slot = LoadoutManager.Slot.one;
+                   }
+                   else
+                   {
+                       ClearEquippedWeapon();
+                   }
+               }
+           }
+       }*/
 
     void SpawnWeaponPickup(GameObject weapon)
     {
@@ -259,38 +277,86 @@ public class PlayerController : MonoBehaviour
         LoadoutManager.instance.slot = LoadoutManager.Slot.none;
     }
 
-    void SwapWeapons()
+    /* void SwapWeapons()
+     {
+         if (equippedWeapon == null || LoadoutManager.instance.weaponSlot1Object == null || LoadoutManager.instance.weaponSlot2Object == null) return;
+
+         if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
+         {
+             equippedWeapon.enabled = false;
+
+             if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
+             {
+                 LoadoutManager.instance.slot1Renderer.enabled = false;
+                 LoadoutManager.instance.slot2Renderer.enabled = true;
+                 equippedWeapon = LoadoutManager.instance.weaponSlot2;
+                 LoadoutManager.instance.slot = LoadoutManager.Slot.two;
+             }
+             else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
+             {
+                 LoadoutManager.instance.slot1Renderer.enabled = true;
+                 LoadoutManager.instance.slot2Renderer.enabled = false;
+                 equippedWeapon = LoadoutManager.instance.weaponSlot1;
+                 LoadoutManager.instance.slot = LoadoutManager.Slot.one;
+             }
+
+             equippedWeapon.enabled = true;
+             equippedWeapon.UpdateUI();
+             StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
+         }
+     }*/
+
+    //Adds the picked up weapon to a list and retieves and displays the weapon data. Keeps track of the weapons in the list
+    public void WeaponPickup(weaponStats weapon)
     {
-        if (equippedWeapon == null || LoadoutManager.instance.weaponSlot1Object == null || LoadoutManager.instance.weaponSlot2Object == null) return;
+        weaponsList.Add(weapon);
 
-        if (Input.GetKeyDown(KeyCode.Q) && canSwitchWeapon)
+        shootRate = weapon.shootRate;
+        shootDistance = weapon.shootDistance;
+        weightModifier = weapon.weightModifier;
+        weapondamage = weapon.weapondamage;
+
+        weaponModel.sharedMesh = weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponMaterial.sharedMaterial = weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        selectedWeapon = weaponsList.Count - 1;
+
+    }
+    //Allows for switching from one weapon is the list to the other from Input.
+    void WeaponSelect()
+    {
+        if (GameManager.instance.isPaused == false)
         {
-            equippedWeapon.enabled = false;
-
-            if (equippedWeapon == LoadoutManager.instance.weaponSlot1)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedWeapon < weaponsList.Count - 1)
             {
-                LoadoutManager.instance.slot1Renderer.enabled = false;
-                LoadoutManager.instance.slot2Renderer.enabled = true;
-                equippedWeapon = LoadoutManager.instance.weaponSlot2;
-                LoadoutManager.instance.slot = LoadoutManager.Slot.two;
+                selectedWeapon++;
+                ChangeWeapon();
             }
-            else if (equippedWeapon == LoadoutManager.instance.weaponSlot2)
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedWeapon > 0)
             {
-                LoadoutManager.instance.slot1Renderer.enabled = true;
-                LoadoutManager.instance.slot2Renderer.enabled = false;
-                equippedWeapon = LoadoutManager.instance.weaponSlot1;
-                LoadoutManager.instance.slot = LoadoutManager.Slot.one;
+                selectedWeapon--;
+                ChangeWeapon();
             }
-
-            equippedWeapon.enabled = true;
-            equippedWeapon.UpdateUI();
-            StartCoroutine(GameManager.instance.FlashWeaponName(equippedWeapon));
         }
     }
+    //Updates the weapons stats for each weapon when the player switches weapon 
+    void ChangeWeapon()
+    {
+        shootRate = weaponsList[selectedWeapon].shootRate;
+        shootDistance = weaponsList[selectedWeapon].shootDistance;
+        weapondamage = weaponsList[selectedWeapon].weapondamage;
+        weightModifier = weaponsList[selectedWeapon].weightModifier;
+
+
+        weaponModel.sharedMesh = weaponsList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponMaterial.sharedMaterial = weaponsList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+    }
+
 
     public void SpawnPlayer()
     {
-        Reset();        
+        Reset();
 
         characterController.enabled = false;
         if (GameManager.instance.playerSpawnPosition != null) transform.position = GameManager.instance.playerSpawnPosition.transform.position;

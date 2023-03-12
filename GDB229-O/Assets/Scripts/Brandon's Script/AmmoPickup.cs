@@ -14,10 +14,4 @@ public class AmmoPickup : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-
-
-
-
-
 }

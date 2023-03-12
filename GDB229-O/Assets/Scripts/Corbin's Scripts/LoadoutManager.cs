@@ -37,7 +37,7 @@ public class LoadoutManager : MonoBehaviour
 
     private void Start()
     {
-        gunPosition = GameManager.instance.playerController.GetGunPosition();
+        // gunPosition = GameManager.instance.playerController.GetGunPosition();
         GameManager.instance.playerController.ClearEquippedWeapon();
     }
 
